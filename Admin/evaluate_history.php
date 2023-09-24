@@ -36,7 +36,37 @@
                 </div> -->
               </div>
               <div class="card-body p-3">
-
+                 <form method="POST" action="export.php">
+                      <div class="row">
+                          <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                              <div class="input-group">
+                                  <div class="input-group-append">
+                                      <div class="input-group-text">
+                                          <i class="fa-solid fa-filter"></i>
+                                      </div>
+                                  </div>
+                                  <select class="form-control form-control-sm small" name="year" required>
+                                      <option selected value="">Export by year</option>
+                                      <?php
+                                        // Query to fetch distinct years from the date_evaluated column
+                                        $yearQuery = mysqli_query($conn, "SELECT DISTINCT YEAR(date_evaluated) AS year FROM evaluation ORDER BY year");
+                                        if(mysqli_num_rows($yearQuery) > 0 ) {
+                                          while ($row = mysqli_fetch_assoc($yearQuery)) {
+                                              $year = $row['year'];
+                                              echo "<option value='$year'>$year</option>";
+                                          }
+                                        } else {
+                                            echo "<option value='' selected disabled>No record found</option>";
+                                        }
+                                        
+                                      ?>
+                                  </select>
+                                  <button type="submit" name="export_evaluation" class="ml-2 btn btn-success btn-sm float-right"><i class="fa-solid fa-file-excel"></i> Export</button>
+                                  <button type="button" class="ml-2 btn btn-primary btn-sm float-right" onclick=location=URL><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+                              </div>
+                          </div>
+                      </div>
+                 </form>
                  <table id="example11" class="table table-bordered table-hover text-sm">
                   <thead>
                   <tr> 
@@ -51,12 +81,14 @@
                   </thead>
                   <tbody id="users_data">
                       <?php 
+                        $currentYear = date('Y'); // Get the current year
                         $sql = mysqli_query($conn, "SELECT *, subject.name, section.section, section.yr_level, AVG(evaluation.grand_total) AS avg_grand_total
                         FROM evaluation
                         JOIN users ON evaluation.user_Id = users.user_Id
                         JOIN subject ON evaluation.subject_Id = subject.sub_Id
                         JOIN section ON evaluation.section_Id = section.section_Id
                         WHERE evaluation.evaluation_status = 1
+                        AND YEAR(evaluation.date_evaluated) = $currentYear
                         GROUP BY evaluation.user_Id, evaluation.subject_Id ");
                         while ($row = mysqli_fetch_array($sql)) {
                       ?>

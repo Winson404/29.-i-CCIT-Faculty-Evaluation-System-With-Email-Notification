@@ -151,7 +151,7 @@
                 </div>
                 <div class="card-footer">
                   <div class="float-right">
-                    <a href="supervisor.php" class="btn bg-secondary"><i class="fa-solid fa-backward"></i> Back to list</a>
+                    <a href="dean.php" class="btn bg-secondary"><i class="fa-solid fa-backward"></i> Back to list</a>
                     <button type="submit" class="btn bg-primary" name="create_dean" id="create_admin"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
                   </div>
                 </div>
@@ -298,7 +298,7 @@
               </div>
               <div class="card-footer">
                 <div class="float-right">
-                  <a href="supervisor.php" class="btn bg-secondary"><i class="fa-solid fa-backward"></i> Back to list</a>
+                  <a href="dean.php" class="btn bg-secondary"><i class="fa-solid fa-backward"></i> Back to list</a>
                   <button type="submit" class="btn bg-primary" name="update_dean" id="create_admin"><i class="fa-solid fa-floppy-disk"></i> Submit</button>
                 </div>
               </div>

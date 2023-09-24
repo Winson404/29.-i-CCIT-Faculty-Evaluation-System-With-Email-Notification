@@ -53,7 +53,8 @@
                   <tbody id="users_data">
                       <?php
                         $i = 1;  
-                        $sql = mysqli_query($conn, "SELECT * FROM subject s JOIN users u ON s.instructor_Id=u.user_Id JOIN section sec ON s.section_Id=sec.section_Id ORDER BY name");
+                        $sql = mysqli_query($conn, "SELECT * FROM subject ORDER BY name");
+                        // $sql = mysqli_query($conn, "SELECT * FROM subject s JOIN users u ON s.instructor_Id=u.user_Id JOIN section sec ON s.section_Id=sec.section_Id ORDER BY name");
                         while ($row = mysqli_fetch_array($sql)) {
                       ?>
                     <tr>
@@ -61,8 +62,32 @@
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['code']; ?></td>
                         <td><?php echo $row['units']; ?></td>
-                        <td><?php echo ' '.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'].' '; ?></td>
-                        <td><?php echo $row['yr_level'].' - '.$row['section']; ?></td>
+                        <td>
+                          <?php 
+                              if (is_numeric($row['instructor_Id'])) {
+                                  $ins_Id = $row['instructor_Id']; 
+                                  $fetch = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$ins_Id'");
+                                  $row2 = mysqli_fetch_array($fetch);
+                                  echo $row2['firstname'].' '.$row2['middlename'].' '.$row2['lastname'].' '.$row2['suffix'];
+                              } else {
+                                  echo $row['instructor_Id'];
+                              }
+                          ?>
+                        </td>
+                        <td>
+                          <?php 
+                              if (is_numeric($row['section_Id'])) {
+                                  $sec_Id = $row['section_Id']; 
+                                  $fetch2 = mysqli_query($conn, "SELECT * FROM section WHERE section_Id='$sec_Id'");
+                                  $row2 = mysqli_fetch_array($fetch2);
+                                  echo $row2['yr_level'].' - '.$row2['section'];
+                              } else {
+                                  echo $row['section_Id'];
+                              }
+                          ?>
+                        </td>
+                        <!-- <td><?php //echo ' '.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'].' '; ?></td> -->
+                        <!-- <td><?php //echo $row['yr_level'].' - '.$row['section']; ?></td> -->
                     </tr>
                     <?php } ?>
                   </tbody>

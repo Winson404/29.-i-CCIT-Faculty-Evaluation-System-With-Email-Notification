@@ -231,9 +231,9 @@
 
 
           <?php if($row['user_type'] != 'Student'): ?>
-          <li class="nav-item">
+         <!--  <li class="nav-item">
             <a href="#" class="nav-link text-muted"><i class="fa-solid fa-file"></i><p>&nbsp;&nbsp;&nbsp; View report (On-going)</p></a>
-          </li>
+          </li> -->
           <?php endif; ?>
 
         </ul>

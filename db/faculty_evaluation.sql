@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2023 at 04:42 PM
+-- Generation Time: Sep 24, 2023 at 07:13 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `evaluation` (
   `grand_total` int(11) NOT NULL,
   `evaluation_status` int(11) NOT NULL DEFAULT '0' COMMENT '0=Unverified, 1=Verified',
   `date_evaluated` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Dumping data for table `evaluation`
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `evaluation` (
 
 INSERT INTO `evaluation` (`Id`, `evaluated_by`, `acad_Id`, `user_Id`, `section_Id`, `subject_Id`, `A1`, `A2`, `A3`, `A4`, `A5`, `A_Total`, `B1`, `B2`, `B3`, `B4`, `B5`, `B_Total`, `C1`, `C2`, `C3`, `C4`, `C5`, `C_Total`, `D1`, `D2`, `D3`, `D4`, `D5`, `D_Total`, `grand_total`, `evaluation_status`, `date_evaluated`) VALUES
 (7, 72, 1, 67, 3, 7, 3, 3, 3, 3, 3, 15, 4, 4, 4, 4, 4, 20, 3, 3, 3, 3, 3, 15, 4, 4, 4, 4, 4, 20, 70, 1, '2023-09-03 17:52:57'),
-(9, 792, 1, 67, 3, 7, 5, 5, 5, 5, 5, 25, 5, 5, 5, 5, 5, 25, 5, 5, 5, 4, 4, 23, 1, 1, 1, 1, 1, 5, 78, 1, '2023-09-09 20:48:38');
+(12, 67, 1, 83, 1, 4, 5, 5, 5, 5, 5, 25, 4, 4, 4, 4, 4, 20, 5, 5, 5, 5, 5, 25, 4, 4, 4, 5, 5, 22, 92, 1, '2023-09-25 00:41:04');
 
 -- --------------------------------------------------------
 
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `section` (
   `section` varchar(100) NOT NULL,
   `department` varchar(255) NOT NULL,
   `date_created` varchar(30) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `section`
@@ -130,7 +130,8 @@ INSERT INTO `section` (`section_Id`, `yr_level`, `section`, `department`, `date_
 (14, '4th year', 'Section 1', 'Bachelor of Science in Information Technology', '2023-06-22'),
 (15, '4th year', 'Section 2', 'Bachelor of Science in Computer Science', '2023-06-22'),
 (16, '4th year', 'Section 3', 'Bachelor of Science in Information Technology', '2023-06-22'),
-(17, '4th year', 'Section 4', 'Bachelor of Science in Computer Science', '2023-06-22');
+(17, '4th year', 'Section 4', 'Bachelor of Science in Computer Science', '2023-06-22'),
+(18, '3rd year', 'fdsfds', 'Bachelor of Science in Information Technology', '2023-09-24');
 
 -- --------------------------------------------------------
 
@@ -143,22 +144,10 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `name` varchar(100) NOT NULL,
   `code` varchar(50) NOT NULL,
   `units` varchar(30) NOT NULL,
-  `instructor_Id` int(11) NOT NULL,
-  `section_Id` int(11) NOT NULL,
+  `instructor_Id` varchar(255) NOT NULL,
+  `section_Id` varchar(255) NOT NULL,
   `date_created` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
-
---
--- Dumping data for table `subject`
---
-
-INSERT INTO `subject` (`sub_Id`, `name`, `code`, `units`, `instructor_Id`, `section_Id`, `date_created`) VALUES
-(3, 'Subject 11', 'Code 1', '3', 67, 1, '2023-06-22'),
-(4, 'Subject 12', 'Code 2', '3', 83, 1, '2023-06-22'),
-(5, 'Subject 13', '2131432', '3', 89, 1, '2023-06-25'),
-(6, 'Subject 1', '42355', '3', 89, 3, '2023-06-25'),
-(7, 'Subject 2', '354', '3', 67, 3, '2023-06-25'),
-(8, 'Subject 3', '4255', '3', 83, 3, '2023-06-25');
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 -- --------------------------------------------------------
 
@@ -185,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `ID_verification` varchar(255) NOT NULL,
   `password` varchar(100) NOT NULL,
   `user_type` varchar(50) NOT NULL DEFAULT 'Student',
-  `student_status` int(11) NOT NULL DEFAULT '0' COMMENT '0=Pending Account, 1=Verified Account',
+  `student_status` int(11) NOT NULL DEFAULT '0' COMMENT '0=Pending Account, 1=Verified Account, 2=Denied/Deleted',
   `verification_code` int(11) NOT NULL,
   `date_registered` date NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=97 ;
@@ -195,12 +184,12 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`user_Id`, `stud_type`, `student_ID`, `year_section`, `department`, `acad_rank`, `firstname`, `middlename`, `lastname`, `suffix`, `dob`, `age`, `email`, `gender`, `image`, `ID_verification`, `password`, `user_type`, `student_status`, `verification_code`, `date_registered`) VALUES
-(66, '', '', 3, '', '', 'Erwin', 'Cabag', 'Son', '', '1997-09-22', '25 years old', 'admin@gmail.com', 'Male', '3.jpg', '', '0192023a7bbd73250516f069df18b500', 'Admin', 0, 415136, '2022-11-25'),
-(67, '', '', 0, 'Bachelor of Science in Information Technology', 'sampledsa', 'Faculty fnames', 'Faculty mname', 'Faculty lname', '', '2016-03-09', '6 years old', 'faculty@gmail.com', 'Male', 'santiago.png', '', '0192023a7bbd73250516f069df18b500', 'Faculty', 1, 448397, '2022-11-25'),
-(72, 'Regular', '4243242345', 3, '', '', 'Student 1', 'Mname', 'Lname', '', '2020-01-28', '3 years old', 'student@gmail.com', 'Male', 'academia.png', '16.jpg', '0192023a7bbd73250516f069df18b500', 'Student', 1, 420213, '2022-12-27'),
+(66, '', '', 3, '', '', 'Admin', 'Admin', 'Admin', '', '1997-09-22', '25 years old', 'admin@gmail.com', 'Male', '3.jpg', '', '0192023a7bbd73250516f069df18b500', 'Admin', 0, 415136, '2022-11-25'),
+(67, '', '', 0, 'Bachelor of Science in Information Technology', 'sampledsa', 'One', 'Two', 'Three', '', '2016-03-09', '6 years old', 'faculty@gmail.com', 'Male', 'santiago.png', '', '0192023a7bbd73250516f069df18b500', 'Faculty', 1, 448397, '2022-11-25'),
+(72, 'Regular', '4243242345', 3, '', '', 'Faculty1', 'Mname', 'Lname', '', '2020-01-28', '3 years old', 'student@gmail.com', 'Male', 'academia.png', '16.jpg', '0192023a7bbd73250516f069df18b500', 'Student', 1, 420213, '2022-12-27'),
 (73, '', '', 5, '', '', 'Norlyn', 'Son', 'Gelig', '', '2022-12-15', '1 week old', 'Norlynfdsfdgelig16@gmail.com', 'Male', '4.jpg', '', 'a03fd6e43c16b44429d829dffa31321a', 'Student', 2, 0, '2022-12-27'),
 (74, '', '', 1, '', '', 'Student 2', 'Mname', 'Lname', 'Suffix', '2022-12-15', '1 week old', 'student2@gmail.com', 'Male', '14.jpg', '', '0192023a7bbd73250516f069df18b500', 'Student', 1, 0, '2022-12-27'),
-(75, '', '', 6, '', '', 'Norlyn', 'Son', 'Gelig', '', '2022-12-15', '1 week old', 'Norlgelig16@gmail.com', 'Male', '17.jpg', '', '74129ee1fc4edfc41937efbbd6231c42', 'Student', 0, 0, '2022-12-27'),
+(75, 'Regular', '', 6, '', '', 'Norlyn', 'Son', 'Gelig', '', '2022-12-15', '1 week old', 'Norlgelig16@gmail.com', 'Male', '17.jpg', '', '74129ee1fc4edfc41937efbbd6231c42', 'Student', 2, 0, '2022-12-27'),
 (76, '', '', 7, '', '', 'gfdgfdgdggfdgdgdfg', 'dgdfg', 'fdgdfg', 'df', '2022-12-07', '2 weeks old', 'Norlyngfdgfdgd23gelig16@gmail.com', 'Male', '2.jpg', '', '225f667d9243201a6b2b35e008ebe3d3', 'Student', 2, 0, '2022-12-27'),
 (77, '', '', 8, '', '', 'First name', 'First name', 'First name', 'First name', '2023-04-04', '1 day old', 'admFirstnamein@gmail.com', 'Male', '2.jpg', '', '20db0bfeecd8fe60533206a2b5e9891a', 'Student', 0, 0, '2023-04-05'),
 (78, '', '', 9, '', '', 'First name', 'First name', 'First name', 'First name', '2020-02-04', '3 years old', 'adminFirsdastname@gmail.com', 'Male', '13.jpg', '', '1dd42fb217b3ca177ff30a7eca0e55c3', 'Student', 0, 0, '2023-04-05'),
@@ -212,7 +201,7 @@ INSERT INTO `users` (`user_Id`, `stud_type`, `student_ID`, `year_section`, `depa
 (85, '', '', 4, '', '', 'dsadadas', 'dsadadasdsadadas', 'dsadadas', '', '2023-06-07', '2 weeks old', 'admidsadadasdsadadasn@gmail.com', 'Male', 'a.jpg', '', '027b2b51cc349162e1cf7ae967c8741f', 'Supervisor', 0, 0, '2023-06-22'),
 (86, '', '', 5, 'Bachelor of Science in Computer Science', '', 'firstname', 'firstname', 'firstname', '', '2023-05-30', '3 weeks old', 'sellefirstnamesadr@gmail.com', 'Male', '15.jpg', '', '342f5c77ed008542e78094607ce1f7f3', 'Faculty', 0, 0, '2023-06-22'),
 (87, '', '43242423', 7, 'Bachelor of Science in Information Technology', '', 'firstnamefirstname', 'firstnamefirstnamefirstname', 'firstnamefirstname', '', '2023-06-05', '2 weeks old', 'sonerwifirstnamefirstnameafrren12@gmail.com', 'Female', 'aics.jpg', '', 'f4f1954d1d8c4f23049bdf8eb3a712a1', 'Student', 2, 0, '2023-06-22'),
-(89, '', '', 3, 'Bachelor of Science in Computer Science', 'Sample', 'dog', 'dog', 'dog', '', '2023-05-29', '3 weeks old', 'stadogff@gmail.com', 'Male', '18.jpg', '', '2c3da8d0c0774c77eae32955bb549041', 'Faculty', 0, 0, '2023-06-23'),
+(89, '', '', 3, 'Bachelor of Science in Computer Science', 'Sample', 'dog', 'dog', 'dog', '', '2023-05-29', '3 weeks old', 'stadogff@gmail.com', 'Male', '18.jpg', '', '2c3da8d0c0774c77eae32955bb549041', 'Faculty', 1, 0, '2023-06-23'),
 (90, '', '43432432432432', 1, '', '', 'requiredrequired', 'required', 'required', '', '2023-06-07', '2 weeks old', 'admirequiredn@gmail.com', 'Male', '24.jpg', '', 'e81948490ddf54e80a22593640178350', 'Student', 0, 0, '2023-06-24'),
 (91, '', '123456', 1, 'Bachelor of Science in Computer Science', '', 'last', 'ffdsfsfds', 'ffdsfsfds', '', '2023-05-31', '3 weeks old', 'admffdsfsfds43in@gmail.com', 'Male', 'a.jpg', '', 'f363791a5fc1c8cc8b480751b6fc2ae9', 'Student', 0, 0, '2023-06-24'),
 (92, '', '', 4, 'Bachelor of Science in Computer Science', '', 'ahahhanewfaculty', 'ahahhanewfaculty', 'ahahhanewfaculty', '', '2023-05-31', '3 weeks old', 'admahahhanewfacultyin@gmail.com', 'Male', '24.jpg', '', 'c8424b1182f5d5feeb255589184e0dfa', 'Faculty', 0, 0, '2023-06-24'),
@@ -268,17 +257,17 @@ MODIFY `acad_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 -- AUTO_INCREMENT for table `evaluation`
 --
 ALTER TABLE `evaluation`
-MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-MODIFY `section_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+MODIFY `section_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-MODIFY `sub_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+MODIFY `sub_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `users`
 --
