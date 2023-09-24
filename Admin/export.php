@@ -53,7 +53,7 @@
       }
 
       $xlsx = SimpleXLSXGen::fromArray($visitor);
-      $xlsx->downloadAs('Visitor records.xlsx'); // This will download the file to your local system
+      $xlsx->downloadAs('Faculty Evaluation records.xlsx'); // This will download the file to your local system
 
       // $xlsx->saveAs('resident.xlsx'); // This will save the file to your server
 
