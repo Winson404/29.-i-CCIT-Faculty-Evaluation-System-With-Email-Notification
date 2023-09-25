@@ -33,13 +33,13 @@
                         </div>
                         <div class="col-lg-4"></div>
                         <div class="col-lg-4"></div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>Student ID</b></span>
                             <input type="text" class="form-control"  placeholder="Student ID" name="student_ID" required>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>Year and Section</b></span>
                             <select class="form-control" name="year_section" id="year_section" required>
@@ -58,13 +58,11 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>Department name</b></span>
-                            <select class="form-control" name="department" required>
+                            <select class="form-control" name="department" id="department" required>
                               <option selected disabled value="">Select department</option>
-                              <option value="Bachelor of Science in Computer Science">Bachelor of Science in Computer Science</option>
-                              <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
                             </select>
                           </div>
                         </div>
@@ -231,5 +229,29 @@
       yearSectionDropdown.disabled = false;
       yearSectionDropdown.setAttribute('required', 'required');
     }
+  });
+
+  $(document).ready(function () {
+    // When the "Year and Section" dropdown changes
+    $('#year_section').on('change', function () {
+      // Get the selected section ID
+      var sectionId = $(this).val();
+      
+      if (sectionId) {
+        // Make an Ajax request to fetch the department for the selected section
+        $.ajax({
+          type: 'POST',
+          url: 'processes.php', // Create this PHP file to handle the request
+          data: { section_id: sectionId },
+          success: function (response) {
+            // Update the "Department name" dropdown with the received data
+            $('#department').html(response);
+          }
+        });
+      } else {
+        // Clear the "Department name" dropdown if no section is selected
+        $('#department').html('<option selected disabled value="">Select department</option>');
+      }
+    });
   });
 </script>

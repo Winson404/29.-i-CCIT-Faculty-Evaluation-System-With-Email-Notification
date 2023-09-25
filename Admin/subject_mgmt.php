@@ -84,7 +84,7 @@
                         if(mysqli_num_rows($sec) > 0) {
                           while ($s = mysqli_fetch_array($sec)) {
                             ?>
-                            <option value="<?php echo $s['section_Id']; ?>"><?php echo $s['yr_level'].' - '.$s['section']; ?></option>
+                            <option value="<?php echo $s['section_Id']; ?>"><?php echo $s['yr_level'].' - '.$s['section'].' - '.$s['department']; ?></option>
                             <?php
                           }
                         } else {
@@ -194,7 +194,7 @@
                           if(mysqli_num_rows($sec) > 0) {
                             while ($s = mysqli_fetch_array($sec)) {
                               ?>
-                              <option value="<?php echo $s['section_Id']; ?>" <?php if($s['section_Id'] == $section_Id) { echo 'selected'; } ?> ><?php echo $s['yr_level'].' - '.$s['section']; ?></option>
+                              <option value="<?php echo $s['section_Id']; ?>" <?php if($s['section_Id'] == $section_Id) { echo 'selected'; } ?> ><?php echo $s['yr_level'].' - '.$s['section'].' - '.$s['department']; ?></option>
                               <?php
                             }
                           } else {

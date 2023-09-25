@@ -66,6 +66,7 @@
                     <th>UNITS</th>
                     <th>INSTRUCTOR NAME</th>
                     <th>SECTION</th>
+                    <th>DEPARTMENT</th>
                     <th>DATE CREATED</th>
                     <?php if($u_type == 'Admin'): ?>
                     <th>TOOLS</th>
@@ -101,6 +102,18 @@
                                   $fetch2 = mysqli_query($conn, "SELECT * FROM section WHERE section_Id='$sec_Id'");
                                   $row2 = mysqli_fetch_array($fetch2);
                                   echo $row2['yr_level'].' - '.$row2['section'];
+                              } else {
+                                  echo $row['section_Id'];
+                              }
+                          ?>
+                        </td>
+                        <td>
+                          <?php 
+                              if (is_numeric($row['section_Id'])) {
+                                  $sec_Id = $row['section_Id']; 
+                                  $fetch2 = mysqli_query($conn, "SELECT * FROM section WHERE section_Id='$sec_Id'");
+                                  $row2 = mysqli_fetch_array($fetch2);
+                                  echo $row2['department'];
                               } else {
                                   echo $row['section_Id'];
                               }

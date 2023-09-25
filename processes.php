@@ -310,4 +310,27 @@
 	}
 
 
+
+	// LOAD AUTOMATICALLY THE DEPARTMENT UPON SELECTING A YR LEVEL AND SECTION - REGISTER.PHP
+	if (isset($_POST['section_id'])) {
+	  $sectionId = $_POST['section_id'];
+
+	  // Query to get the department based on the selected section
+	  $query = "SELECT department FROM section WHERE section_Id = $sectionId";
+	  $result = mysqli_query($conn, $query);
+
+	  if ($result) {
+	    $row = mysqli_fetch_assoc($result);
+	    $department = $row['department'];
+
+	    // Return the department as an option
+	    echo '<option value="' . $department . '">' . $department . '</option>';
+	  } else {
+	    // Handle the case where no department is found
+	    echo '<option value="">No department found</option>';
+	  }
+	}
+
+
+
 ?>
