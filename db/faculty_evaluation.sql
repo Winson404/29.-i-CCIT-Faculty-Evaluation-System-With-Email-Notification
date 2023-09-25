@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2023 at 07:13 PM
+-- Generation Time: Sep 25, 2023 at 05:54 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -147,7 +147,15 @@ CREATE TABLE IF NOT EXISTS `subject` (
   `instructor_Id` varchar(255) NOT NULL,
   `section_Id` varchar(255) NOT NULL,
   `date_created` varchar(50) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `subject`
+--
+
+INSERT INTO `subject` (`sub_Id`, `name`, `code`, `units`, `instructor_Id`, `section_Id`, `date_created`) VALUES
+(1, 'dave', '12', '3', 'One Two Three', 'sample', '24/06/2023'),
+(2, 'sa', '432432', '3', '89', '8', '2023-09-25');
 
 -- --------------------------------------------------------
 
@@ -267,7 +275,7 @@ MODIFY `section_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-MODIFY `sub_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+MODIFY `sub_Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
