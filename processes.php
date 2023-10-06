@@ -27,7 +27,7 @@
 		        $_SESSION['message'] = "You have been blocked for 10 minutes due to multiple failed login attempts.";
 			    $_SESSION['text'] = "Please try again.";
 			    $_SESSION['status'] = "error";
-				header("Location: login.php");
+				header("Location: index.php");
 		        exit();
 		    } else {
 		        // Block has expired, reset the login attempts counter
@@ -59,7 +59,7 @@
 					$_SESSION['message'] = "Only verified accounts can login.";
 				    $_SESSION['text'] = "Please try again.";
 				    $_SESSION['status'] = "error";
-					header("Location: login.php");
+					header("Location: index.php");
 				}
 			}
 		} else {
@@ -68,7 +68,7 @@
 			$_SESSION['message'] = "Incorrect password.";
 		    $_SESSION['text'] = "Please try again.";
 		    $_SESSION['status'] = "error";
-			header("Location: login.php");
+			header("Location: index.php");
 		}
 	}
 
@@ -300,7 +300,7 @@
 			$_SESSION['message'] = "Password has been changed.";
 		    $_SESSION['text'] = "Please login to your account";
 		    $_SESSION['status'] = "success";
-			header("Location: login.php");
+			header("Location: index.php");
 		} else {
 			$_SESSION['message'] = "Something went wrong while updating your password.";
 		    $_SESSION['text'] = "Please try again";

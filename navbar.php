@@ -41,7 +41,7 @@
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="login.php" class="navbar-brand">
+      <a href="index.php" class="navbar-brand">
         <img src="images/CCIT.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">i-CCIT Faculty Evaluation System</span>
       </a>
@@ -81,7 +81,7 @@
       <!-- Right navbar links -->
       <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
         <li class="nav-item">
-            <a href="login.php" class="nav-link">Login</a>
+            <a href="index.php" class="nav-link">Login</a>
           </li>
       </ul>
     </div>

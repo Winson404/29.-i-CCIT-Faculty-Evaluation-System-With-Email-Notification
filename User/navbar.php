@@ -282,6 +282,6 @@
 <?php
 // ------------------------------CLOSING THE SESSION OF THE LOGGED IN USER WITH else statement----------//
     } else {
-     header('Location: ../login.php');
+     header('Location: ../index.php');
     }
 ?>

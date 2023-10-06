@@ -7,7 +7,7 @@
 
       <p>
         We could not find the page you were looking for.
-        Meanwhile, you may <a href="login.php">return to login page.</a>
+        Meanwhile, you may <a href="index.php">return to login page.</a>
       </p>
 
      <!--  <form class="search-form">
