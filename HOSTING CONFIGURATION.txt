@@ -1,0 +1,10 @@
+Hosting Site: 000webhost
+Gmail used: Tatakmedellin@gmail.com
+Password: 09509972084qwe123!@#
+Website name: Faculty-Evaluation
+Pass: Qwe123!@#
+
+Database Configuration:
+Name: faculty_evaluation
+Username: faculty_evaluation
+Password: Qwe123!@#
