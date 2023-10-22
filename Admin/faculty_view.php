@@ -41,24 +41,24 @@
                     </div>
                     <div class="col-lg-9 col-md-6 col-12">
                       <div class="row">
-                        <div class="col-12">
+                        <!-- <div class="col-12">
                           <div class="form-group">
                               <small class="text-muted"><b>Academic rank:</b></small>
-                              <h6><?php echo $row['acad_rank']; ?></h6>
+                              <h6><?php //echo $row['acad_rank']; ?></h6>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-lg-7 col col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                               <small class="text-muted"><b>Full name:</b></small>
                               <h6><?php echo ' '.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'].' '; ?></h6>
                             </div>
                         </div>
-                        <div class="col-lg-5 col col-md-6 col-sm-6 col-12">
+                        <!-- <div class="col-lg-5 col col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                               <small class="text-muted"><b>Department:</b></small>
-                              <h6><?php echo $row['department']; ?></h6>
+                              <h6><?php //echo $row['department']; ?></h6>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-4">
                             <div class="form-group">
                               <small class="text-muted"><b>Date of Birth:</b></small>

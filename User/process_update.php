@@ -22,6 +22,22 @@
 		$email		      = mysqli_real_escape_string($conn, $_POST['email']);
 		$file             = basename($_FILES["fileToUpload"]["name"]);
 
+		// SET THE DEPARTMENT AND ACADEMIC RANK INTO EMPTY IF THE USER IS FACULTY
+		$get_type = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$user_Id' ");
+		$row = mysqli_fetch_array($get_type);
+		$u_type = $row['user_type'];
+
+		$fac_department = $department;
+		$fac_acad_rank = $acad_rank;
+		if($u_type == 'Faculty') {
+			$fac_department = "";
+			$fac_acad_rank = "";
+		} else {
+			$fac_department = $department;
+			$fac_acad_rank = $acad_rank;
+		}
+
+
 		$check = mysqli_query($conn, "SELECT * FROM users WHERE email='$email' AND user_Id !='$user_Id' ");
 		if(mysqli_num_rows($check) > 0) {
 		   $_SESSION['message'] = "Email already exists!";
@@ -31,7 +47,7 @@
 		} else {
 
 				if(empty($file)) {
-					  $update = mysqli_query($conn, "UPDATE users SET stud_type='$stud_type', student_ID='$student_ID', year_section='$year_section', department='$department', acad_rank='$acad_rank', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
+					  $update = mysqli_query($conn, "UPDATE users SET stud_type='$stud_type', student_ID='$student_ID', year_section='$year_section', department='$fac_department', acad_rank='$fac_acad_rank', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
 
 			      	  if($update) {
 			          	$_SESSION['message'] = "Record has been updated!";
@@ -91,7 +107,7 @@
 
 				        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 				     
-				              $update = mysqli_query($conn, "UPDATE users SET stud_type='$stud_type', student_ID='$student_ID', year_section='$year_section', department='$department', acad_rank='$acad_rank', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
+				              $update = mysqli_query($conn, "UPDATE users SET stud_type='$stud_type', student_ID='$student_ID', year_section='$year_section', department='$fac_department', acad_rank='$fac_acad_rank', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
 
 					      	  if($update) {
 					          	$_SESSION['message'] = "Record has been updated!";

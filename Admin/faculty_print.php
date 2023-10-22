@@ -43,8 +43,8 @@
                   <thead>
                     <tr>
                       <th>#</th> 
-                      <th>ACADEMIC RANK</th>
-                      <th>DEPARTMENT</th>
+                     <!--  <th>ACADEMIC RANK</th>
+                      <th>DEPARTMENT</th> -->
                       <th>FULL NAME</th>
                       <th>BIRTHDAY</th>
                       <th>AGE</th>
@@ -60,8 +60,8 @@
                       ?>
                     <tr>
                         <td><?php echo $i++; ?></td>
-                        <td><?php echo $row['acad_rank']; ?></td>
-                        <td><?php echo $row['department']; ?></td>
+                       <!--  <td><?php //echo $row['acad_rank']; ?></td>
+                        <td><?php //echo $row['department']; ?></td> -->
                         <td><?php echo $row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix']; ?></td>
                         <td><?php echo $row['dob']; ?></td>
                         <td><?php echo $row['age']; ?></td>

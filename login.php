@@ -15,7 +15,7 @@
                     <div class="col-6 p-2">
                       <!-- <a href="login.php" class="h1"><b>Login</b></a> -->
                       <a href="login.php" class="h4">
-                        <img src="images/CCIT.png" alt="logo" class="img-fluid shadow-sm img-circle">
+                        <img src="images/CCITLogo.png" alt="logo" class="img-fluid shadow-sm img-circle">
                       </a>
                     </div>
                   </div>

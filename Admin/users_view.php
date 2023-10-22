@@ -67,7 +67,7 @@
                         <div class="col-lg-3 col col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                               <small class="text-muted"><b>Year and Section:</b></small>
-                              <h6><?php echo $row2['yr_level'].' - '.$row2['section']; ?></h6>
+                              <h6><?php if($row['year_section'] != 0) { echo $row2['yr_level'].' - '.$row2['section']; } else { echo 'N/A'; }?></h6>
                             </div>
                         </div>
                         <div class="col-lg-3 col col-md-6 col-sm-6 col-12">

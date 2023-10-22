@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>i-CCIT Faculty Evaluation System</title>
   <!---FAVICON ICON FOR WEBSITE--->
-  <link rel="shortcut icon" type="image/png" href="images/CCIT.png">
+  <link rel="shortcut icon" type="image/png" href="images/CCITLogo.png">
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
@@ -42,7 +42,7 @@
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
       <a href="index.php" class="navbar-brand">
-        <img src="images/CCIT.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="images/CCITLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">i-CCIT Faculty Evaluation System</span>
       </a>
 

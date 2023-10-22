@@ -42,7 +42,7 @@
                           <a class="h5 text-primary"><b>Basic information</b></a>
                           <div class="dropdown-divider"></div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <!-- <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>Department name</b></span>
                             <select class="form-control" name="department" required>
@@ -57,8 +57,8 @@
                             <span class="text-dark"><b>Academic rank</b></span>
                             <input type="text" class="form-control"  placeholder="Academic rank" name="acad_rank" required>
                           </div>
-                        </div>
-                        <div class="col-4"></div>
+                        </div> 
+                        <div class="col-4"></div> -->
                         <div class="col-lg-4 col col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                               <span class="text-dark"><b>First name</b></span>
@@ -150,10 +150,6 @@
                                   <input type="file" class="custom-file-input" id="exampleInputFile" name="fileToUpload" onchange="getImagePreview(event)" required>
                                   <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
-                                <div class="input-group-append">
-                                  <span class="input-group-text">Upload</span>
-                                </div>
-
                               </div>
                               <p class="help-block text-danger">Max. 500KB</p>
                             </div>
@@ -226,23 +222,23 @@
                         <a class="h5 text-primary"><b>Basic information</b></a>
                         <div class="dropdown-divider"></div>
                       </div>
-                      <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                      <!-- <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
                           <span class="text-dark"><b>Department name</b></span>
                           <select class="form-control" name="department">
                             <option selected disabled value="">Select department</option>
-                            <option value="Bachelor of Science in Computer Science" <?php if($row['department'] == 'Bachelor of Science in Computer Science') { echo 'selected'; } ?>>Bachelor of Science in Computer Science</option>
-                            <option value="Bachelor of Science in Information Technology" <?php if($row['department'] == 'Bachelor of Science in Information Technology') { echo 'selected'; } ?>>Bachelor of Science in Information Technology</option>
+                            <option value="Bachelor of Science in Computer Science" <?php //if($row['department'] == 'Bachelor of Science in Computer Science') { echo 'selected'; } ?>>Bachelor of Science in Computer Science</option>
+                            <option value="Bachelor of Science in Information Technology" <?php //if($row['department'] == 'Bachelor of Science in Information Technology') { echo 'selected'; } ?>>Bachelor of Science in Information Technology</option>
                           </select>
                         </div>
                       </div>
                       <div class="col-4">
-                          <div class="form-group">
-                            <span class="text-dark"><b>Academic rank</b></span>
-                            <input type="text" class="form-control"  placeholder="Academic rank" name="acad_rank" value="<?php echo $row['acad_rank']; ?>" required>
-                          </div>
+                        <div class="form-group">
+                          <span class="text-dark"><b>Academic rank</b></span>
+                          <input type="text" class="form-control"  placeholder="Academic rank" name="acad_rank" value="<?php //echo $row['acad_rank']; ?>" required>
                         </div>
-                      <div class="col-4"></div>
+                      </div>
+                      <div class="col-4"></div> -->
                       <div class="col-lg-4 col col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>First name </b></span>
@@ -314,10 +310,6 @@
                                 <input type="file" class="custom-file-input" id="exampleInputFile" name="fileToUpload" onchange="getImagePreview(event)" >
                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                               </div>
-                              <div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
-                              </div>
-
                             </div>
                             <p class="help-block text-danger">Max. 500KB</p>
                           </div>

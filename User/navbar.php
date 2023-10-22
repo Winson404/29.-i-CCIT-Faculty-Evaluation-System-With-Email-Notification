@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>i-CCIT Faculty Evaluation System</title>
   <!---FAVICON ICON FOR WEBSITE--->
-  <link rel="shortcut icon" type="image/png" href="../images/CCIT.png">
+  <link rel="shortcut icon" type="image/png" href="../images/CCITLogo.png">
   <!-- Select2 -->
   <link rel="stylesheet" href="../plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="../plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
@@ -167,7 +167,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-      <img src="../images/CCIT.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="../images/CCITLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">i-CCIT Faculty</span>
       <br>
       <span class="text-sm ml-5 font-weight-light mt-2">&nbsp;&nbsp;Evaluation System</span>

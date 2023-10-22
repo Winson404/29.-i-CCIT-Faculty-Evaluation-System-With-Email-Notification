@@ -80,9 +80,10 @@
                       <div class="form-group row">
                         <label for="First name" class="col-sm-2 col-form-label">Student ID</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="First name" placeholder="First name" value="<?php echo $row['student_ID']; ?>" readonly>
+                          <input type="text" class="form-control" id="First name" placeholder="Student ID" value="<?php echo $row['student_ID']; ?>" readonly>
                         </div>
                       </div>
+                      <?php if($row['year_section'] != 0): ?>
                       <div class="form-group row">
                         <label for="First name" class="col-sm-2 col-form-label">Year and Section</label>
                         <div class="col-sm-10">
@@ -94,7 +95,7 @@
                               if(mysqli_num_rows($fetch2) > 0) {
                                 while ($row2 = mysqli_fetch_array($fetch2)) {
                                   ?>
-                                  <option value="<?php echo $row2['section_Id']; ?>" <?php if($row2['section_Id'] == $sec) { echo 'selected'; } ?>><?php echo $row2['yr_level'].' - '.$row2['section']; ?></option>
+                                  <option value="<?php echo $row2['section_Id']; ?>" <?php if($row2['section_Id'] == $sec) { echo 'selected'; } ?>><?php echo $row2['yr_level'].' - '.$row2['section'].' : '.$row2['department']; ?></option>
                                   <?php
                                 }
                               } else { ?>
@@ -103,19 +104,14 @@
                           </select>
                         </div>
                       </div>
-                    <?php elseif($row['user_type'] == 'Faculty'): ?>
+                      <?php else: ?>
                       <div class="form-group row">
                         <label for="Department" class="col-sm-2 col-form-label">Department</label>
                         <div class="col-sm-10">
                           <input type="text" class="form-control" id="Department" placeholder="Department" value="<?php echo $row['department']; ?>" readonly>
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="Academic rank" class="col-sm-2 col-form-label">Academic rank</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="Academic rank" placeholder="Academic rank" value="<?php echo $row['acad_rank']; ?>" readonly>
-                        </div>
-                      </div>
+                      <?php endif; ?>
                     <?php endif; ?>
                       <div class="form-group row">
                         <label for="First name" class="col-sm-2 col-form-label">Full name</label>
@@ -157,14 +153,14 @@
                         <a  class="col-sm-12 text-primary text-bold">Basic information</a>
                       </div>
                       <?php if($row['user_type'] == 'Student'): ?>
-                      <div class="form-group row">
+                      <div class="form-group row d-none">
                         <label for="First name" class="col-sm-2 col-form-label">Student type</label>
                         <div class="col-sm-10">
                           <div class="input-group">
                             <select class="form-control" name="stud_type" required>
                               <option selected disabled value="">Select type</option>
-                              <option value="Regular"       <?php if($row['stud_type'] == 'Regular') { echo 'selected'; } ?>>Regular student</option>
-                              <option value="Irregular student"     <?php if($row['stud_type'] == 'Irregular student') { echo 'selected'; } ?>>Irregular student</option>
+                              <option value="Regular" <?php if($row['stud_type'] == 'Regular') { echo 'selected'; } ?>>Regular student</option>
+                              <option value="Irregular"<?php if($row['stud_type'] == 'Irregular') { echo 'selected'; } ?>>Irregular student</option>
                             </select>
                           </div>
                         </div>
@@ -172,43 +168,44 @@
                       <div class="form-group row">
                         <label for="First name" class="col-sm-2 col-form-label">Student ID</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="First name" placeholder="Student ID" name="student_ID" value="<?php echo $row['student_ID']; ?>" >
+                          <input type="text" class="form-control" id="First name" placeholder="Student ID" name="student_ID" value="<?php echo $row['student_ID']; ?>" required>
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="First name" class="col-sm-2 col-form-label">Year and Section</label>
-                        <div class="col-sm-10">
-                          <select class="form-control" name="year_section" required>
-                            <option selected disabled value="">Select section</option>
-                            <?php 
-                              $sec = $row['year_section'];
-                              $fetch2 = mysqli_query($conn, "SELECT * FROM section");
-                              if(mysqli_num_rows($fetch2) > 0) {
-                                while ($row2 = mysqli_fetch_array($fetch2)) {
-                                  ?>
-                                  <option value="<?php echo $row2['section_Id']; ?>" <?php if($row2['section_Id'] == $sec) { echo 'selected'; } ?>><?php echo $row2['yr_level'].' - '.$row2['section']; ?></option>
-                                  <?php
-                                }
-                              } else { ?>
-                                <option value="">No record found</option>
-                            <?php } ?>
-                          </select>
+                      <?php if($row['year_section'] != 0): ?>
+                        <div class="form-group row d-none">
+                          <label for="First name" class="col-sm-2 col-form-label">Year and Section</label>
+                          <div class="col-sm-10">
+                            <select class="form-control" name="year_section" required>
+                              <option selected disabled value="">Select section</option>
+                              <?php 
+                                $sec = $row['year_section'];
+                                $fetch2 = mysqli_query($conn, "SELECT * FROM section");
+                                if(mysqli_num_rows($fetch2) > 0) {
+                                  while ($row2 = mysqli_fetch_array($fetch2)) {
+                                    ?>
+                                    <option value="<?php echo $row2['section_Id']; ?>" <?php if($row2['section_Id'] == $sec) { echo 'selected'; } ?>><?php echo $row2['yr_level'].' - '.$row2['section'].' : '.$row2['department']; ?></option>
+                                    <?php
+                                  }
+                                } else { ?>
+                                  <option value="">No record found</option>
+                              <?php } ?>
+                            </select>
+                          </div>
                         </div>
-                      </div>
-                      <?php elseif($row['user_type'] == 'Faculty'): ?>
-                      <div class="form-group row">
-                        <label for="Department" class="col-sm-2 col-form-label">Department</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="Department" placeholder="Department" name="department" value="<?php echo $row['department']; ?>" >
+                        <?php else: ?>
+                        <div class="form-group row d-none">
+                          <label for="Department" class="col-sm-2 col-form-label">Department</label>
+                          <div class="col-sm-10">
+                            <select class="form-control" name="department" id="department" required>
+                              <option selected disabled value="">Select department</option>
+                              <option value="Bachelor of Science in Computer Science" <?php if($row['department'] == 'Bachelor of Science in Computer Science') { echo 'selected'; } ?>>Bachelor of Science in Computer Science</option>
+                              <option value="Bachelor of Science in Information Technology" <?php if($row['department'] == 'Bachelor of Science in Information Technology') { echo 'selected'; } ?>>Bachelor of Science in Information Technology</option>
+                            </select>
+                          </div>
                         </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="Academic rank" class="col-sm-2 col-form-label">Academic rank</label>
-                        <div class="col-sm-10">
-                          <input type="text" class="form-control" id="Academic rank" placeholder="Academic rank" value="<?php echo $row['acad_rank']; ?>" name="acad_rank" required>
-                        </div>
-                      </div>
                       <?php endif; ?>
+                    <?php endif; ?>
+                      
                       <div class="form-group row">
                         <label for="First name" class="col-sm-2 col-form-label">First name</label>
                         <div class="col-sm-10">

@@ -163,9 +163,6 @@
                               <input type="file" class="custom-file-input" id="exampleInputFile" name="fileToUpload" onchange="newgetImagePreview(event)" >
                               <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                             </div>
-                            <div class="input-group-append">
-                              <span class="input-group-text">Upload</span>
-                            </div>
                           </div>
                         </div>
                         <div class="col-sm-5"><div class="form-group" id="user_preview"></div></div>

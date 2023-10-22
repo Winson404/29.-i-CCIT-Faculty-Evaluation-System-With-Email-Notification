@@ -412,8 +412,8 @@
 	if(isset($_POST['update_faculty'])) {
 
 		$user_Id		  = mysqli_real_escape_string($conn, $_POST['user_Id']);
-		$department       = mysqli_real_escape_string($conn, $_POST['department']);
-		$acad_rank        = mysqli_real_escape_string($conn, $_POST['acad_rank']);
+		// $department       = mysqli_real_escape_string($conn, $_POST['department']);
+		// $acad_rank        = mysqli_real_escape_string($conn, $_POST['acad_rank']);
 		$firstname        = mysqli_real_escape_string($conn, $_POST['firstname']);
 		$middlename       = mysqli_real_escape_string($conn, $_POST['middlename']);
 		$lastname         = mysqli_real_escape_string($conn, $_POST['lastname']);
@@ -433,7 +433,7 @@
 		} else {
 
 			if(empty($file)) {
-				$update = mysqli_query($conn, "UPDATE users SET department='$department', acad_rank='$acad_rank', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
+				$update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
 
               	  if($update) {
 		          	$_SESSION['message'] = "Record has been updated!";
@@ -493,7 +493,7 @@
 
 					if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-					 $update = mysqli_query($conn, "UPDATE users SET department='$department', acad_rank='$acad_rank', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
+					 $update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
 
 	              	  if($update) {
 			          	$_SESSION['message'] = "Record has been updated!";

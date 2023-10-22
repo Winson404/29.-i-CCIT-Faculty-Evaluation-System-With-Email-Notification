@@ -63,6 +63,7 @@
                             <span class="text-dark"><b>Department name</b></span>
                             <select class="form-control" name="department" id="department" required>
                               <option selected disabled value="">Select department</option>
+                              
                             </select>
                           </div>
                         </div>
@@ -217,17 +218,33 @@
   // Get references to the dropdowns
   var studentTypeDropdown = document.getElementById('stud_type');
   var yearSectionDropdown = document.getElementById('year_section');
+  var departmentDropdown = document.getElementById('department');
+  // Define the department options for Irregular students
+  var irregularDepartmentOptions = `
+    <option selected disabled value="">Select department</option>
+    <option value="Bachelor of Science in Computer Science">Bachelor of Science in Computer Science</option>
+    <option value="Bachelor of Science in Information Technology">Bachelor of Science in Information Technology</option>
+  `;
 
+  // Store the original options for the Year and Section dropdown
+  var originalYearSectionOptions = yearSectionDropdown.innerHTML;
+  
   // Add an event listener to the Student Type dropdown
   studentTypeDropdown.addEventListener('change', function() {
     if (studentTypeDropdown.value === 'Irregular') {
       // If Irregular is selected, disable Year and Section dropdown
       yearSectionDropdown.disabled = true;
       yearSectionDropdown.removeAttribute('required');
+      yearSectionDropdown.innerHTML = '<option selected disabled value="">Select section</option>';
+      departmentDropdown.innerHTML = irregularDepartmentOptions;
+
     } else {
       // If Regular is selected, enable Year and Section dropdown and make it required
       yearSectionDropdown.disabled = false;
       yearSectionDropdown.setAttribute('required', 'required');
+      departmentDropdown.innerHTML = '<option selected disabled value="">Select department</option>';
+      // Restore the original options for the Year and Section dropdown
+      yearSectionDropdown.innerHTML = originalYearSectionOptions;
     }
   });
 

@@ -216,8 +216,8 @@
 
 	// SAVE FACULTY - FACULTY_MGMT.PHP
 	if(isset($_POST['create_faculty'])) {
-		$department       = mysqli_real_escape_string($conn, $_POST['department']);
-		$acad_rank        = mysqli_real_escape_string($conn, $_POST['acad_rank']);
+		// $department       = mysqli_real_escape_string($conn, $_POST['department']);
+		// $acad_rank        = mysqli_real_escape_string($conn, $_POST['acad_rank']);
 		$firstname        = mysqli_real_escape_string($conn, $_POST['firstname']);
 		$middlename       = mysqli_real_escape_string($conn, $_POST['middlename']);
 		$lastname         = mysqli_real_escape_string($conn, $_POST['lastname']);
@@ -285,7 +285,7 @@
 
 	        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-        		$save = mysqli_query($conn, "INSERT INTO users (department, acad_rank, firstname, middlename, lastname, suffix, dob, age, email, gender, image, password, user_type, student_status, date_registered) VALUES ('$department', '$acad_rank', '$firstname', '$middlename', '$lastname', '$suffix', '$dob', '$age', '$email', '$gender', '$file', '$password', '$user_type', 1, '$date_registered')");
+        		$save = mysqli_query($conn, "INSERT INTO users (firstname, middlename, lastname, suffix, dob, age, email, gender, image, password, user_type, student_status, date_registered) VALUES ('$firstname', '$middlename', '$lastname', '$suffix', '$dob', '$age', '$email', '$gender', '$file', '$password', '$user_type', 1, '$date_registered')");
 
               	  if($save) {
               	  	  $name = $firstname.' '.$middlename.' '.$lastname.' '.$suffix;

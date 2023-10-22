@@ -57,14 +57,27 @@
                   <tbody id="users_data">
                       <?php 
                         $i = 1;
-                        $sql = mysqli_query($conn, "SELECT * FROM users JOIN section ON users.year_section=section.section_Id WHERE user_type = 'Student' AND student_status=0 ORDER BY firstname");
+                        $sql = mysqli_query($conn, "SELECT * FROM users WHERE user_type = 'Student' AND student_status=0 ORDER BY firstname");
                         while ($row = mysqli_fetch_array($sql)) {
                       ?>
                     <tr>
                         <td><?php echo $i++; ?></td>
                         <td><?php echo $row['student_ID']; ?></td>
                         <td><?php echo ' '.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'].' '; ?></td>
-                        <td><?php echo $row['yr_level'].' - '.$row['section']; ?></td>
+                        <td>
+                          <?php 
+                              $yr_sec = $row['year_section'];
+                              $get_section = mysqli_query($conn, "SELECT * FROM section WHERE section_Id='$yr_sec'");
+                              $row2 = mysqli_fetch_array($get_section);
+
+                              if($row['year_section'] == 0) {
+                                echo 'Year and Section Not Applicable for Irregular Students';
+                              } else {
+                                echo $row2['yr_level'].' - '.$row2['section'];
+                              }
+                          ?>
+                            
+                        </td>
                         <td>
                           <?php 
                             if ($row['department'] == "Bachelor of Science in Computer Science") {
