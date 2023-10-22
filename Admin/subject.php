@@ -115,7 +115,7 @@
                                   $row2 = mysqli_fetch_array($fetch2);
                                   echo $row2['department'];
                               } else {
-                                  echo $row['section_Id'];
+                                  echo $row['department'];
                               }
                           ?>
                         </td>
