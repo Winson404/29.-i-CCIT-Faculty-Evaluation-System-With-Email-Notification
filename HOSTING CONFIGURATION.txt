@@ -1,10 +1,41 @@
-Hosting Site: 000webhost
-Gmail used: Tatakmedellin@gmail.com
-Password: 09509972084qwe123!@#
-Website name: Faculty-Evaluation
-Pass: Qwe123!@#
+Infinityfree
+Email: richardgeneroso030621@gmail.com
+Username: username if0_35237254!
+Account password: @Saving09359428963
 
-Database Configuration:
-Name: faculty_evaluation
-Username: faculty_evaluation
-Password: Qwe123!@#
+ifastnet
+Email: sonerwin12@gmail.com
+Password: @Saving09509972084
+
+MYSQL USERS
+Database name: facultye_faculty_evaluation
+Username: facultye_faculty_evaluation
+Password: @Saving09509972084
+
+CONFIGURATION ON confi.php
+$conn = mysqli_connect("localhost","facultye_faculty_evaluation","@Saving09509972084","facultye_faculty_evaluation");
+
+
+EMAIL ACCOUNTS: 
+Email : no-reply@faculty-evaluation.site
+Password: @Saving09509972084
+
+
+PHP CODE needed above
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/Exception.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/PHPMailer.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/SMTP.php';
+
+Username:	no-reply@faculty-evaluation.site
+Password:	@Saving09509972084
+Incoming Server:	mail.faculty-evaluation.site
+IMAP Port: 993 POP3 Port: 995
+Outgoing Server:	mail.faculty-evaluation.site
+SMTP Port: 465
+
+Username:	nmempcoop@faculty-evaluation.site
+Password:	@Saving09509972084
+Incoming Server:	mail.faculty-evaluation.site
+IMAP Port: 993 POP3 Port: 995
+Outgoing Server:	mail.faculty-evaluation.site
+SMTP Port: 465
