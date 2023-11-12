@@ -52,7 +52,7 @@
                   </thead>
                   <tbody id="users_data">
                       <?php 
-                        $sql = mysqli_query($conn, "SELECT * FROM users WHERE user_type = 'Faculty' ");
+                        $sql = mysqli_query($conn, "SELECT * FROM users WHERE is_deleted=0 AND user_type = 'Faculty' ");
                         while ($row = mysqli_fetch_array($sql)) {
                       ?>
                     <tr>

@@ -87,7 +87,7 @@
 		$lastname         = mysqli_real_escape_string($conn, $_POST['lastname']);
 		$suffix           = mysqli_real_escape_string($conn, $_POST['suffix']);
 		$dob              = mysqli_real_escape_string($conn, $_POST['dob']);
-		$age              = mysqli_real_escape_string($conn, $_POST['age']);
+		// $age              = mysqli_real_escape_string($conn, $_POST['age']);
 		$gender           = mysqli_real_escape_string($conn, $_POST['gender']);
 		$email		      = mysqli_real_escape_string($conn, $_POST['email']);
 		$password         = md5($_POST['password']);
@@ -155,7 +155,7 @@
 
 		        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-	        		$save = mysqli_query($conn, "INSERT INTO users (stud_type, student_ID, year_section, department, firstname, middlename, lastname, suffix, dob, age, email, gender, ID_verification, password, date_registered) VALUES ('$stud_type', '$student_ID', '$year_section', '$department', '$firstname', '$middlename', '$lastname', '$suffix', '$dob', '$age', '$email', '$gender', '$file', '$password', '$date_registered')");
+	        		$save = mysqli_query($conn, "INSERT INTO users (stud_type, student_ID, year_section, department, firstname, middlename, lastname, suffix, dob, email, gender, ID_verification, password, date_registered) VALUES ('$stud_type', '$student_ID', '$year_section', '$department', '$firstname', '$middlename', '$lastname', '$suffix', '$dob', '$email', '$gender', '$file', '$password', '$date_registered')");
 
 	              	  if($save) {
 			          	$_SESSION['message'] = "Registration successful!";

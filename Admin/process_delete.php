@@ -50,7 +50,7 @@
 	if(isset($_POST['delete_faculty'])) {
 		$user_Id = $_POST['user_Id'];
 
-		$delete = mysqli_query($conn, "DELETE FROM users WHERE user_Id='$user_Id'");
+		$delete = mysqli_query($conn, "UPDATE users SET is_deleted=1 WHERE user_Id='$user_Id'");
 		if($delete) {
 			msg_success("faculty.php");
 		} else {

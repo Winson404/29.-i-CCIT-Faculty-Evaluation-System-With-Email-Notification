@@ -65,12 +65,12 @@
                               <h6><?php echo date("F d, Y", strtotime($row['dob'])); ?></h6>
                             </div>
                         </div>
-                        <div class="col-4">
+                       <!--  <div class="col-4">
                             <div class="form-group">
                               <small class="text-muted"><b>Age:</b></small>
-                              <h6><?php echo $row['age']; ?></h6>
+                              <h6><?php //echo $row['age']; ?></h6>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-4">
                             <div class="form-group">
                               <small class="text-muted"><b>Sex:</b></small>

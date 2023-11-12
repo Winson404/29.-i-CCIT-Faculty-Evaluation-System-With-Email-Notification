@@ -177,7 +177,7 @@
 		$lastname         = mysqli_real_escape_string($conn, $_POST['lastname']);
 		$suffix           = mysqli_real_escape_string($conn, $_POST['suffix']);
 		$dob              = mysqli_real_escape_string($conn, $_POST['dob']);
-		$age              = mysqli_real_escape_string($conn, $_POST['age']);
+		// $age              = mysqli_real_escape_string($conn, $_POST['age']);
 		$gender           = mysqli_real_escape_string($conn, $_POST['gender']);
 		$email		      = mysqli_real_escape_string($conn, $_POST['email']);
 		$file             = basename($_FILES["fileToUpload"]["name"]);
@@ -198,7 +198,7 @@
 			} else {
 
 				if(empty($file)) {
-					$update = mysqli_query($conn, "UPDATE users SET stud_type='$stud_type', student_ID='$student_ID', year_section='$year_section', department='$department', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
+					$update = mysqli_query($conn, "UPDATE users SET stud_type='$stud_type', student_ID='$student_ID', year_section='$year_section', department='$department', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
 
 	              	  if($update) {
 			          	$_SESSION['message'] = "Record has been updated!";
@@ -258,7 +258,7 @@
 
 						if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-						 $update = mysqli_query($conn, "UPDATE users SET stud_type='$stud_type', student_ID='$student_ID', year_section='$year_section', department='$department', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender', ID_verification='$file' WHERE user_Id='$user_Id' ");
+						 $update = mysqli_query($conn, "UPDATE users SET stud_type='$stud_type', student_ID='$student_ID', year_section='$year_section', department='$department', firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', email='$email', gender='$gender', ID_verification='$file' WHERE user_Id='$user_Id' ");
 
 		              	  if($update) {
 				          	$_SESSION['message'] = "Record has been updated!";
@@ -419,7 +419,7 @@
 		$lastname         = mysqli_real_escape_string($conn, $_POST['lastname']);
 		$suffix           = mysqli_real_escape_string($conn, $_POST['suffix']);
 		$dob              = mysqli_real_escape_string($conn, $_POST['dob']);
-		$age              = mysqli_real_escape_string($conn, $_POST['age']);
+		// $age              = mysqli_real_escape_string($conn, $_POST['age']);
 		$gender           = mysqli_real_escape_string($conn, $_POST['gender']);
 		$email		      = mysqli_real_escape_string($conn, $_POST['email']);
 		$file             = basename($_FILES["fileToUpload"]["name"]);
@@ -433,7 +433,7 @@
 		} else {
 
 			if(empty($file)) {
-				$update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
+				$update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
 
               	  if($update) {
 		          	$_SESSION['message'] = "Record has been updated!";
@@ -493,7 +493,7 @@
 
 					if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-					 $update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
+					 $update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
 
 	              	  if($update) {
 			          	$_SESSION['message'] = "Record has been updated!";
@@ -575,7 +575,7 @@
 		$lastname         = mysqli_real_escape_string($conn, $_POST['lastname']);
 		$suffix           = mysqli_real_escape_string($conn, $_POST['suffix']);
 		$dob              = mysqli_real_escape_string($conn, $_POST['dob']);
-		$age              = mysqli_real_escape_string($conn, $_POST['age']);
+		// $age              = mysqli_real_escape_string($conn, $_POST['age']);
 		$gender           = mysqli_real_escape_string($conn, $_POST['gender']);
 		$email		      = mysqli_real_escape_string($conn, $_POST['email']);
 		$file             = basename($_FILES["fileToUpload"]["name"]);
@@ -589,7 +589,7 @@
 		} else {
 
 			if(empty($file)) {
-				$update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
+				$update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
 
               	  if($update) {
 		          	$_SESSION['message'] = "Record has been updated!";
@@ -649,7 +649,7 @@
 
 					if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 
-					 $update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
+					 $update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
 
 	              	  if($update) {
 			          	$_SESSION['message'] = "Record has been updated!";
@@ -732,7 +732,7 @@
 		$lastname         = mysqli_real_escape_string($conn, $_POST['lastname']);
 		$suffix           = mysqli_real_escape_string($conn, $_POST['suffix']);
 		$dob              = mysqli_real_escape_string($conn, $_POST['dob']);
-		$age              = mysqli_real_escape_string($conn, $_POST['age']);
+		// $age              = mysqli_real_escape_string($conn, $_POST['age']);
 		$gender           = mysqli_real_escape_string($conn, $_POST['gender']);
 		$email		      = mysqli_real_escape_string($conn, $_POST['email']);
 		$file             = basename($_FILES["fileToUpload"]["name"]);
@@ -746,7 +746,7 @@
 		} else {
 
 				if(empty($file)) {
-					  $update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
+					  $update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', email='$email', gender='$gender' WHERE user_Id='$user_Id' ");
 
 			      	  if($update) {
 			          	$_SESSION['message'] = "Record has been updated!";
@@ -806,7 +806,7 @@
 
 				        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 				     
-				              $update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', age='$age', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
+				              $update = mysqli_query($conn, "UPDATE users SET firstname='$firstname', middlename='$middlename', lastname='$lastname', suffix='$suffix', dob='$dob', email='$email', gender='$gender', image='$file' WHERE user_Id='$user_Id' ");
 
 					      	  if($update) {
 					          	$_SESSION['message'] = "Record has been updated!";

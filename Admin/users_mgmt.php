@@ -117,14 +117,14 @@
                               <input type="date" class="form-control" name="dob" placeholder="Date of birth" required id="birthdate" onchange="calculateAge()">
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                       <!--  <div class="col-lg-2 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                               <span class="text-dark"><b>Age</b></span>
                               <input type="text" class="form-control bg-white" placeholder="Age" required id="txtage" name="age" readonly>
                             </div>
-                        </div>
+                        </div> -->
                        
-                        <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>Sex</b></span>
                             <select class="form-control" name="gender" required>
@@ -136,7 +136,7 @@
                           </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                        <div class="col-lg-5 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
                               <span class="text-dark"><b>Email</b></span>
                               <input type="email" class="form-control" placeholder="email@gmail.com" name="email" id="email"  onkeydown="validation()" onkeyup="validation()" required>
@@ -327,14 +327,14 @@
                             <input type="date" class="form-control" name="dob" placeholder="Date of birth" required id="birthdate" onchange="calculateAge()" value="<?php echo $row['dob']; ?>">
                           </div>
                       </div>
-                      <div class="col-lg-2 col-md-6 col-sm-6 col-12">
+                     <!--  <div class="col-lg-2 col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>Age</b></span>
-                            <input type="text" class="form-control bg-white" placeholder="Select DOB first" required id="txtage" name="age" readonly value="<?php echo $row['age']; ?>">
+                            <input type="text" class="form-control bg-white" placeholder="Select DOB first" required id="txtage" name="age" readonly value="<?php //echo $row['age']; ?>">
                           </div>
                       </div>
-                     
-                      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                      -->
+                      <div class="col-lg-4 col-md-6 col-sm-6 col-12">
                         <div class="form-group">
                           <span class="text-dark"><b>Sex</b></span>
                           <select class="form-control" name="gender" required>
@@ -346,7 +346,7 @@
                         </div>
                       </div>
 
-                      <div class="col-lg-4 col-md-6 col-sm-6 col-12">
+                      <div class="col-lg-5 col-md-6 col-sm-6 col-12">
                           <div class="form-group">
                             <span class="text-dark"><b>Email</b></span>
                             <input type="email" class="form-control" placeholder="email@gmail.com" name="email" id="email"  onkeydown="validation()" onkeyup="validation()" required value="<?php echo $row['email']; ?>">

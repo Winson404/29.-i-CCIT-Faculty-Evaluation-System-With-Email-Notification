@@ -66,7 +66,7 @@
 
                 <br>
 
-                <p class="text-left">Instructions: Please evaluate the faculty using the scale below. Encircle your rating.</p>
+                <p class="text-left">Instructions: Please evaluate the faculty using the scale below. Encircle your rating. Please answer all the evaluations.</p>
                 <table class="table table-bordered table-hover text-sm table-sm">
                   <thead>
                   <tr class="text-center"> 
@@ -390,7 +390,7 @@
 
                 <br>
 
-                <p class="text-left">Instructions: Please evaluate the faculty using the scale below. Encircle your rating.</p>
+                <p class="text-left">Instructions: Please evaluate the faculty using the scale below. Encircle your rating. Please answer all the evaluations.</p>
                 <table class="table table-bordered table-hover text-sm table-sm">
                   <thead>
                   <tr class="text-center"> 

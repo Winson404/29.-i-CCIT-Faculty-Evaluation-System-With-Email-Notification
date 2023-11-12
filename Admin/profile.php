@@ -128,12 +128,12 @@
                           <input type="date" class="form-control" name="dob" placeholder="Date of birth" required id="birthdate" onchange="calculateAge()" value="<?php echo $row['dob']; ?>">
                         </div>
                       </div>
-                      <div class="form-group row">
+                     <!--  <div class="form-group row">
                         <label for="txtage" class="col-sm-2 col-form-label">Age</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control bg-white" placeholder="Age" required id="txtage" name="age" readonly value="<?php echo $row['age']; ?>">
+                          <input type="text" class="form-control bg-white" placeholder="Age" required id="txtage" name="age" readonly value="<?php// echo $row['age']; ?>">
                         </div>
-                      </div>
+                      </div> -->
                       <div class="form-group row">
                         <label for="email" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
