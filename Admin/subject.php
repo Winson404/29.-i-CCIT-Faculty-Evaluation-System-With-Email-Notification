@@ -75,7 +75,7 @@
                   </thead>
                   <tbody id="users_data">
                       <?php 
-                        $sql = mysqli_query($conn, "SELECT * FROM subject WHERE acad_Id=1");
+                        $sql = mysqli_query($conn, "SELECT * FROM subject JOIN academic_year ON subject.acad_Id=academic_year.acad_Id WHERE academic_year.status=1");
                         while ($row = mysqli_fetch_array($sql)) {
                       ?>
                     <tr>
