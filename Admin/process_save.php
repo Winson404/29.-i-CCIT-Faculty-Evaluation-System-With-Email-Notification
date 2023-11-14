@@ -552,43 +552,56 @@
 		$section_Id    = mysqli_real_escape_string($conn, $_POST['section_Id']);
 		$date_created  = date('Y-m-d');
 
-		$fetch = mysqli_query($conn, "SELECT * FROM subject WHERE name='$name' AND code='$code' AND units='$units' AND section_Id='$section_Id' AND instructor_Id='$instructor_Id' ");
-		if(mysqli_num_rows($fetch) > 0) {
-			$_SESSION['message'] = "Record already exists.";
-            $_SESSION['text'] = "Please try again.";
-	        $_SESSION['status'] = "error";
-			header("Location: subject_mgmt.php?page=create");
-		} else {
-			$fetch = mysqli_query($conn, "SELECT * FROM subject WHERE name='$name' AND section_Id='$section_Id'");
+		// GET ACTIVE YEAR FOR EVALUATION
+        $active = mysqli_query($conn, "SELECT * FROM academic_year WHERE status = 1");
+        if(mysqli_num_rows($active) > 0) {
+    	    $row = mysqli_fetch_array($active);
+        	$acad_Id = $row['acad_Id'];
+       
+			$fetch = mysqli_query($conn, "SELECT * FROM subject WHERE name='$name' AND code='$code' AND units='$units' AND section_Id='$section_Id' AND instructor_Id='$instructor_Id' ");
 			if(mysqli_num_rows($fetch) > 0) {
-				$_SESSION['message'] = "Duplication of subject in the same section.";
+				$_SESSION['message'] = "Record already exists.";
 	            $_SESSION['text'] = "Please try again.";
 		        $_SESSION['status'] = "error";
 				header("Location: subject_mgmt.php?page=create");
 			} else {
-				// $fetch = mysqli_query($conn, "SELECT * FROM subject WHERE code='$code'.");
-				// if(mysqli_num_rows($fetch) > 0) {
-				// 	$_SESSION['message'] = "Subject code already exists.";
-		        //     $_SESSION['text'] = "Please try again.";
-			    //     $_SESSION['status'] = "error";
-				// 	header("Location: subject_mgmt.php?page=create");
-				// } else {
-					$save = mysqli_query($conn, "INSERT INTO subject (name, code, units, instructor_Id, section_Id, date_created) VALUES ('$name', '$code', '$units', '$instructor_Id', '$section_Id', '$date_created')");
+				$fetch = mysqli_query($conn, "SELECT * FROM subject WHERE name='$name' AND section_Id='$section_Id'");
+				if(mysqli_num_rows($fetch) > 0) {
+					$_SESSION['message'] = "Duplication of subject in the same section.";
+		            $_SESSION['text'] = "Please try again.";
+			        $_SESSION['status'] = "error";
+					header("Location: subject_mgmt.php?page=create");
+				} else {
+					// $fetch = mysqli_query($conn, "SELECT * FROM subject WHERE code='$code'.");
+					// if(mysqli_num_rows($fetch) > 0) {
+					// 	$_SESSION['message'] = "Subject code already exists.";
+			        //     $_SESSION['text'] = "Please try again.";
+				    //     $_SESSION['status'] = "error";
+					// 	header("Location: subject_mgmt.php?page=create");
+					// } else {
+						$save = mysqli_query($conn, "INSERT INTO subject (name, code, units, instructor_Id, section_Id, acad_Id, date_created) VALUES ('$name', '$code', '$units', '$instructor_Id', '$section_Id', '$acad_Id', '$date_created')");
 
-		          	  if($save) {
-			          	$_SESSION['message'] = "Record has been saved!";
-			            $_SESSION['text'] = "Saved successfully!";
-				        $_SESSION['status'] = "success";
-						header("Location: subject_mgmt.php?page=create");
-			          } else {
-			            $_SESSION['message'] = "Something went wrong while saving the information.";
-			            $_SESSION['text'] = "Please try again.";
-				        $_SESSION['status'] = "error";
-						header("Location: subject_mgmt.php?page=create");
-			          }
-				// }
+			          	  if($save) {
+				          	$_SESSION['message'] = "Record has been saved!";
+				            $_SESSION['text'] = "Saved successfully!";
+					        $_SESSION['status'] = "success";
+							header("Location: subject_mgmt.php?page=create");
+				          } else {
+				            $_SESSION['message'] = "Something went wrong while saving the information.";
+				            $_SESSION['text'] = "Please try again.";
+					        $_SESSION['status'] = "error";
+							header("Location: subject_mgmt.php?page=create");
+				          }
+					// }
+				}
 			}
-		}
+
+	 	} else {
+	 		$_SESSION['message'] = "You should have set academic year active first.";
+            $_SESSION['text'] = "Please try again.";
+	        $_SESSION['status'] = "error";
+			header("Location: subject_mgmt.php?page=create");
+        }
 	}
 
 

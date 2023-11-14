@@ -27,8 +27,13 @@ include '../config.php';
 	                if($prevResult->num_rows > 0 ) {
 	                    $conn->query("UPDATE subject SET name = '$name', code = '$code', units = '$units', instructor_Id = '$instructor_Id', section_Id = '$section_Id', department='$department'");
 	                } else {
-	                    $conn->query("INSERT INTO subject(name, code, units, instructor_Id, section_Id, department, date_created)
-	                    VALUES ('$name', '$code', '$units', '$instructor_Id', '$section_Id', '$department', NOW() )");
+	                	// GET ACTIVE YEAR FOR EVALUATION
+				        $active = mysqli_query($conn, "SELECT * FROM academic_year WHERE status = 1");
+				        $row = mysqli_fetch_array($active);
+				        $acad_Id = $row['acad_Id'];
+
+	                    $conn->query("INSERT INTO subject(name, code, units, instructor_Id, section_Id, acad_Id, department, date_created)
+	                    VALUES ('$name', '$code', '$units', '$instructor_Id', '$section_Id', '$acad_Id', '$department', NOW() )");
 	                   
 	                }
 	            }

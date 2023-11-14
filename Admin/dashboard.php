@@ -138,6 +138,60 @@
             </div>
           </div>
 
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <?php
+                  $section = mysqli_query($conn, "SELECT section_Id FROM section");
+                  $row_section = mysqli_num_rows($section);
+                ?>
+                <h3><?php echo $row_section; ?></h3>
+
+                <p>Sections</p>
+              </div>
+              <div class="icon">
+                <i class="fa-solid fa-folder"></i>
+              </div>
+              <a href="section.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <?php
+                  $subject = mysqli_query($conn, "SELECT * FROM subject JOIN academic_year ON subject.acad_Id=academic_year.acad_Id WHERE academic_year.status=1");
+                  $row_subject = mysqli_num_rows($subject);
+                ?>
+                <h3><?php echo $row_subject; ?></h3>
+
+                <p>Subjects</p>
+              </div>
+              <div class="icon">
+                <i class="fa-solid fa-book"></i>
+              </div>
+              <a href="subject.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+              <div class="inner">
+                <?php
+                  $acad_year = mysqli_query($conn, "SELECT acad_Id FROM academic_year");
+                  $row_acad_year = mysqli_num_rows($acad_year);
+                ?>
+                <h3><?php echo $row_acad_year; ?></h3>
+
+                <p>Academic year</p>
+              </div>
+              <div class="icon">
+                <i class="fa-solid fa-calendar"></i>
+              </div>
+              <a href="academic.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
 
         </div>
       </div>

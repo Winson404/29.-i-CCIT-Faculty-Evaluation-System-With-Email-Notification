@@ -75,7 +75,7 @@
                   </thead>
                   <tbody id="users_data">
                       <?php 
-                        $sql = mysqli_query($conn, "SELECT * FROM subject");
+                        $sql = mysqli_query($conn, "SELECT * FROM subject WHERE acad_Id=1");
                         while ($row = mysqli_fetch_array($sql)) {
                       ?>
                     <tr>
