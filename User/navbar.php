@@ -73,7 +73,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="../images/CCIT.png" alt="BMSLogo" height="105" width="105">
+    <img class="animation__shake" src="../images/CCITLogo.png" alt="BMSLogo" height="105" width="105">
   </div> 
 
   <!-- Navbar -->
@@ -227,6 +227,10 @@
           <?php } else { ?>
             <a data-toggle="modal" data-target="#evaluation" class="nav-link"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluation history</p></a>
           <?php } ?>
+          </li>
+
+          <li class="nav-item">
+            <a href="evaluated_by.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'evaluated_by.php') ? 'active' : ''; ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Faculty Summary</p></a>
           </li>
 
 

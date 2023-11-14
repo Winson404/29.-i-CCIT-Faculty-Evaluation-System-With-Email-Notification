@@ -5,10 +5,13 @@
       $Id = $_GET['Id'];
      
 
-      $faculty = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.user_Id=users.user_Id JOIN subject ON evaluation.subject_Id=subject.sub_Id JOIN section ON evaluation.section_Id=section.section_Id WHERE evaluation.evaluated_by='$id' AND evaluation.Id='$Id' ");
+      $faculty = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.user_Id=users.user_Id JOIN subject ON evaluation.subject_Id=subject.sub_Id JOIN section ON evaluation.section_Id=section.section_Id WHERE evaluation.Id='$Id' ");
 
       // $faculty = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$user_Id'");
       $fac = mysqli_fetch_array($faculty);
+      $evaluated_by = $fac['evaluated_by'];
+      $sql2 = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$evaluated_by'");
+      $row2 = mysqli_fetch_array($sql2);
 
       // GET ACTIVE YEAR FOR EVALUATION
       $active = mysqli_query($conn, "SELECT * FROM academic_year WHERE status = 1");
@@ -22,12 +25,12 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-6">
-            <h1><?php echo $fac['firstname'].' '.$fac['middlename'].' '.$fac['lastname'].' '.$fac['suffix']; ?></h1>
+            <h1>Evaluator: <?php echo $row2['firstname'].' '.$row2['middlename'].' '.$row2['lastname'].' '.$row2['suffix']; ?></h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-              <li class="breadcrumb-item active">Faculty profile</li>
+              <li class="breadcrumb-item active">Evaluator's evaluation</li>
             </ol>
           </div>
         </div>

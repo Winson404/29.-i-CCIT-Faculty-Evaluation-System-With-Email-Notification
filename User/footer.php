@@ -163,6 +163,19 @@
       "autoWidth": false,
       "responsive": true,
     });
+
+    $("#example111").DataTable({
+      "responsive": true, "lengthChange": true, "autoWidth": false,
+    }).buttons().container().appendTo('#example111_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
   });
 
 
