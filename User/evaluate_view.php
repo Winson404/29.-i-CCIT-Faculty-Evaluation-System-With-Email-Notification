@@ -4,15 +4,48 @@
     if(isset($_GET['Id'])) {
       $Id = $_GET['Id'];
      
+      if($row['user_type'] == 'Student') {
+        $faculty = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.user_Id=users.user_Id JOIN subject ON evaluation.subject_Id=subject.sub_Id JOIN section ON evaluation.section_Id=section.section_Id WHERE evaluation.evaluated_by='$id' AND evaluation.Id='$Id' ");
 
-      $faculty = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.user_Id=users.user_Id JOIN subject ON evaluation.subject_Id=subject.sub_Id JOIN section ON evaluation.section_Id=section.section_Id WHERE evaluation.evaluated_by='$id' AND evaluation.Id='$Id' ");
+      } else {
+        $faculty = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.user_Id=users.user_Id WHERE evaluation.evaluated_by='$id' AND evaluation.Id='$Id' ");
 
+      }
+
+      
       // $faculty = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$user_Id'");
       $fac = mysqli_fetch_array($faculty);
 
       // GET ACTIVE YEAR FOR EVALUATION
       $active = mysqli_query($conn, "SELECT * FROM academic_year WHERE status = 1");
       $activeId = mysqli_fetch_array($active); 
+
+      // RATINGS FOR A B C D
+     $grades = [
+          'A' => $fac['A_Total'],
+          'B' => $fac['B_Total'],
+          'C' => $fac['C_Total'],
+          'D' => $fac['D_Total'],
+      ];
+
+      foreach ($grades as $grade => $value) {
+          if ($value >= 21 && $value <= 25) {
+              $evaluations[$grade] = "Outstanding";
+          } elseif ($value >= 16 && $value <= 20) {
+              $evaluations[$grade] = "Very Satisfactory";
+          } elseif ($value >= 11 && $value <= 15) {
+              $evaluations[$grade] = "Satisfactory";
+          } elseif ($value >= 6 && $value <= 10) {
+              $evaluations[$grade] = "Moderately Satisfactory";
+          } elseif ($value >= 4 && $value <= 5) {
+              $evaluations[$grade] = "Fair";
+          } else {
+              $evaluations[$grade] = "Poor";
+          }
+      }
+
+
+
 ?>
 
   <!-- Content Wrapper. Contains page content -->
@@ -63,18 +96,26 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#evaltion_history" data-toggle="tab">Evalution record</a></li>
+                <!-- <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#evaltion_history" data-toggle="tab">Evalution record</a></li> -->
                  <!--  <li class="nav-item"><a class="nav-link" href="#viewprofile" data-toggle="tab">Faculty profile</a></li>
                   <li class="nav-item"><a class="nav-link" href="#subjectinfo" data-toggle="tab">Subject info</a></li> -->
-                </ul>
+                <button id="printButton" class="btn btn-success btn-sm float-sm-right"><i class="fa-solid fa-print"></i> Print</button>
+
+                <!-- </ul> -->
               </div><!-- /.card-header -->
               <div class="card-body">
                 <div class="tab-content">
 
 
-                  <div class="active tab-pane" id="evaltion_history">
-                      <table id="example111" class="table table-bordered table-hover text-sm table-sm">
+                  <div class="active tab-pane" id="printElement">
+                    <div class="row d-flex ">
+                    <img src="../images/CCIT.png" alt="" width="100">
+                        <p class="ml-2 mt-3">College of Communication And Information Technology <br>Palanginan Iba Zambales <br> <span class="text-sm text-muted"><b>Printed by:</b> <?= $logged_in; ?> on <?= date('Y-m-d h:i A') ?></span></p>
+                    </div>
+                    <hr>
+                    <p class="text-center"><b>EVALUATION RECORDS FOR <?php echo strtoupper($fac['firstname'].' '.$fac['middlename'].' '.$fac['lastname'].' '.$fac['suffix']); ?></b></p>
+                    <table id="" class="table table-bordered table-hover text-sm table-sm">
                         <thead>
                           <tr>
                             <th>A. Commitment</th>
@@ -105,14 +146,18 @@
                         <tfoot>
                           <tr>
                             <td class="text-center text-bold">Total Score</td>
-                            <td class="text-center text-bold"><span id="A_Total"><?php echo $fac['A_Total']; ?></span></td>
+                            <td class="text-center text-bold"><span id="A_Total"><?php echo $fac['A_Total'] ?></span></td>
+                          </tr>
+                          <tr>
+                            <td class="text-center text-bold">Ratings</td>
+                            <td class="text-center text-bold"><span id="A_Total"><?php echo $evaluations['A'] ?></span></td>
                           </tr>
                         </tfoot>
                     </table>
 
                     <br>
 
-                    <table id="example111" class="table table-bordered table-hover text-sm table-sm">
+                    <table id="" class="table table-bordered table-hover text-sm table-sm">
                       <thead>
                         <tr>
                           <th>B.  Knowledge of Subject</th>
@@ -141,16 +186,20 @@
                         </tr>
                       </tbody>
                       <tfoot>
-                        <tr>
-                          <td class="text-center text-bold">Total Score</td>
-                          <td class="text-center text-bold"><span id="B_Total"><?php echo $fac['B_Total']; ?></span></td>
-                        </tr>
-                      </tfoot>
+                          <tr>
+                            <td class="text-center text-bold">Total Score</td>
+                            <td class="text-center text-bold"><span id="A_Total"><?php echo $fac['B_Total'] ?></span></td>
+                          </tr>
+                          <tr>
+                            <td class="text-center text-bold">Ratings</td>
+                            <td class="text-center text-bold"><span id="A_Total"><?php echo $evaluations['B'] ?></span></td>
+                          </tr>
+                        </tfoot>
                     </table>
 
                     <br>
 
-                    <table id="example111" class="table table-bordered table-hover text-sm table-sm">
+                    <table id="" class="table table-bordered table-hover text-sm table-sm">
                       <thead>
                         <tr>
                           <th>C.  Teaching for independent learning</th>
@@ -180,14 +229,18 @@
                       <tfoot>
                         <tr>
                           <td class="text-center text-bold">Total Score</td>
-                          <td class="text-center text-bold"><span id="C_Total"><?php echo $fac['C_Total']; ?></span></td>
+                          <td class="text-center text-bold"><span id="A_Total"><?php echo $fac['C_Total'] ?></span></td>
+                        </tr>
+                        <tr>
+                          <td class="text-center text-bold">Ratings</td>
+                          <td class="text-center text-bold"><span id="A_Total"><?php echo $evaluations['C'] ?></span></td>
                         </tr>
                       </tfoot>
                     </table>
 
                     <br>
 
-                    <table id="example111" class="table table-bordered table-hover text-sm table-sm">
+                    <table id="" class="table table-bordered table-hover text-sm table-sm">
                       <thead>
                         <tr>
                           <th>D.  Management of Learning</th>
@@ -216,12 +269,37 @@
                         </tr>
                       </tbody>
                       <tfoot>
-                        <tr>
-                          <td class="text-center text-bold">Total Score</td>
-                          <td class="text-center text-bold"><span id="D_Total"><?php echo $fac['D_Total']; ?></span></td>
-                        </tr>
-                      </tfoot>
+                          <tr>
+                            <td class="text-center text-bold">Total Score</td>
+                            <td class="text-center text-bold"><span id="A_Total"><?php echo $fac['D_Total'] ?></span></td>
+                          </tr>
+                          <tr>
+                            <td class="text-center text-bold">Ratings</td>
+                            <td class="text-center text-bold"><span id="A_Total"><?php echo $evaluations['D'] ?></span></td>
+                          </tr>
+                        </tfoot>
                     </table>
+
+                    <div class="container">
+                      <p class="float-right">Overall Rating: 
+                          <?php
+                            $avg_grand_total = $fac['grand_total'];
+                            if ($avg_grand_total >= 95 && $avg_grand_total <= 100) {
+                                echo '<span class="badge bg-primary pt-1">Outstanding</span>';
+                            } elseif ($avg_grand_total >= 90 && $avg_grand_total < 95) {
+                                echo '<span class="badge bg-info pt-1">Very Satisfactory</span>';
+                            } elseif ($avg_grand_total >= 85 && $avg_grand_total < 90) {
+                                echo '<span class="badge bg-success pt-1">Satisfactory</span>';
+                            } elseif ($avg_grand_total >= 80 && $avg_grand_total < 85) {
+                                echo '<span class="badge bg-warning pt-1">Moderately Satisfactory</span>';
+                            } elseif ($avg_grand_total >= 75 && $avg_grand_total < 80) {
+                                echo '<span class="badge bg-light pt-1">Fair</span>';
+                            } elseif ($avg_grand_total < 75) {
+                                echo '<span class="badge bg-secondary pt-1">Poor</span>';
+                            }
+                            ?>
+                      </p>
+                    </div>
                   </div>
 
                   <div class="tab-pane" id="viewprofile">

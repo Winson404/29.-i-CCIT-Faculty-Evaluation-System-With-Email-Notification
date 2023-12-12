@@ -14,6 +14,38 @@
   </div>
 </div>
 
+<div class="modal fade" id="evaluation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered p-3">
+    <div class="modal-content">
+       <div class="modal-header bg-light">
+          <img src="../images/CCIT.png" alt="" class="d-block m-auto img-circle img-fluid shadow-sm" width="100">
+      </div>
+      <div class="modal-body p-5">
+          <h6 class="text-center">You haven't evaluated any instructor yet.</h6>
+      </div>
+      <div class="modal-footer alert-light">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa-solid fa-ban"></i> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="doneEvaluation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered p-3">
+    <div class="modal-content">
+       <div class="modal-header bg-light">
+          <img src="../images/CCIT.png" alt="" class="d-block m-auto img-circle img-fluid shadow-sm" width="100">
+      </div>
+      <div class="modal-body p-5">
+          <h6 class="text-center">You can only evaluate someone this active school year once.</h6>
+      </div>
+      <div class="modal-footer alert-light">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa-solid fa-ban"></i> Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 <br>
@@ -251,7 +283,7 @@
     } 
     else {
         document.getElementById('text').style.color = 'red';
-        document.getElementById('text').innerHTML = 'Domain must be @gmail.com';
+        document.getElementById('text').innerHTML = 'Must be Gmail.com';
         document.getElementById('create_admin').disabled = true;
         document.getElementById('create_admin').style.opacity = (0.4);
         
@@ -349,6 +381,21 @@
       var year2Input = document.getElementsByName('year2')[0];
       year2Input.value = year2.toString();
     }
+  }
+
+
+  // SHOW/HIDE PASSWORD - REGISTRATION/SAVING/UPDATING RECORDS
+  function togglePasswordVisibility(inputId) {
+      var passwordInput = document.getElementById(inputId);
+      var eyeToggle = document.getElementById("eye-toggle-" + inputId);
+
+      if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          eyeToggle.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+      } else {
+          passwordInput.type = "password";
+          eyeToggle.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>';
+      }
   }
   
 </script>

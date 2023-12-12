@@ -68,7 +68,7 @@
             <div class="small-box bg-danger">
               <div class="inner">
                 <?php
-                  $faculty = mysqli_query($conn, "SELECT user_Id from users WHERE user_type='Faculty'");
+                  $faculty = mysqli_query($conn, "SELECT user_Id from users WHERE user_type='Faculty' AND is_deleted=0");
                   $row_faculty = mysqli_num_rows($faculty);
                 ?>
                 <h3><?php echo $row_faculty; ?></h3>
@@ -124,7 +124,7 @@
             <div class="small-box bg-warning">
               <div class="inner">
                 <?php
-                  $eval = mysqli_query($conn, "SELECT Id FROM evaluation WHERE evaluation_status=1");
+                  $eval = mysqli_query($conn, "SELECT Id FROM evaluation WHERE evaluation_status=1 AND acad_Id IN (SELECT acad_Id FROM academic_year WHERE status=1)");
                   $row_eval = mysqli_num_rows($eval);
                 ?>
                 <h3><?php echo $row_eval; ?></h3>
@@ -175,7 +175,7 @@
           </div>
 
           <div class="col-lg-3 col-6">
-            <div class="small-box bg-success">
+            <div class="small-box bg-info">
               <div class="inner">
                 <?php
                   $acad_year = mysqli_query($conn, "SELECT acad_Id FROM academic_year");

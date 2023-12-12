@@ -311,7 +311,12 @@
                   </tr>
                 </tbody>
               </table>
-              
+              <div class="container mt-5 ">
+                <hr>
+                <div class="d-flex flex-column align-items-end">
+                  <p class="text-center "><?= ucwords($printed_by) ?><br> __________________________________ <br><b>Signed and Approved by</b></p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="card-footer">
@@ -635,7 +640,12 @@
                   </tr>
                 </tbody>
               </table>
-              
+              <div class="container mt-5 ">
+                <hr>
+                <div class="d-flex flex-column align-items-end">
+                  <p class="text-center ">__________________________________ <br><b>Signed and Approved by</b></p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="card-footer">

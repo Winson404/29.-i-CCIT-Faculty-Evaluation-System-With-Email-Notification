@@ -5,9 +5,20 @@
       $id = $_SESSION['user_Id'];
       $users = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$id'");
       $row = mysqli_fetch_array($users);
+      $logged_in = $row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'];
 
       // RECORD TIME LOGGED IN TO BE USED IN AUTO LOGOUT - CODE CAN BE FOUND ON FOOTER.PHP
       $_SESSION['last_active'] = time();
+
+      // GET ACTIVE YEAR FOR EVALUATION
+      $active = mysqli_query($conn, "SELECT * FROM academic_year WHERE status = 1");
+      $activeId = mysqli_fetch_array($active);
+
+      $years = '';
+      if(mysqli_num_rows($active) > 0) {
+        // Split the academic year into two years
+        $years = explode('-', $activeId['year']);
+      }
 ?>
 
 <!DOCTYPE html>
@@ -72,9 +83,9 @@
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
+  <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="../images/CCITLogo.png" alt="BMSLogo" height="105" width="105">
-  </div> 
+  </div>  -->
 
   <!-- Navbar -->
   <!-- LIGHT MODE -->
@@ -171,6 +182,8 @@
       <span class="brand-text font-weight-light">i-CCIT Faculty</span>
       <br>
       <span class="text-sm ml-5 font-weight-light mt-2">&nbsp;&nbsp;Evaluation System</span>
+      <br>
+      <span class="badge badge-success text-xs ml-5 font-weight-light mt-2"><?php if(mysqli_num_rows($active) > 0) { echo $activeId['year'].': '.$activeId['semester']; } else { echo 'Evaluation: OFF'; } ?></span>
     </a>
 
 
@@ -206,7 +219,7 @@
         </div> -->
 
       <!-- Sidebar Menu -->
-      <nav class="mt-4">
+      <nav class="mt-5">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           
@@ -214,31 +227,62 @@
           <li class="nav-item">
             <a href="dashboard.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'dashboard.php') ? 'active' : ''; ?>"><i class="fa-solid fa-gauge"></i><p>&nbsp;&nbsp; Dashboard</p></a>
           </li>
-          <li class="nav-item">
-            <a href="process.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'process.php') ? 'active' : ''; ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluate</p></a>
-          </li>
 
-          <li class="nav-item">
+
+          <?php if($row['user_type'] == 'Student') { ?>
+
+
+              <li class="nav-item">
+                <a href="process.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'process.php') ? 'active' : ''; ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluate</p></a>
+              </li>
+              <li class="nav-item">
+              <?php 
+                $evaluate2 = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.evaluated_by=users.user_Id WHERE evaluation.evaluated_by='$id' AND evaluation_status=1 AND acad_Id IN (SELECT acad_Id FROM academic_year WHERE status=1) AND user_type='Student'"); 
+                if(mysqli_num_rows($evaluate2) > 0) { ?>
+                  <a href="evaluate_history.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'evaluate_history.php') ? 'active' : ''; ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluation history</p></a>
+              <?php } else { ?>
+                  <a type="button" data-toggle="modal" data-target="#evaluation" class="nav-link"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluation history</p></a>
+              <?php } ?>
+              </li>
+
+
           <?php 
-            $evaluate = mysqli_query($conn, "SELECT * FROM evaluation WHERE evaluated_by='$id' AND acad_Id IN (SELECT acad_Id FROM academic_year WHERE status=1)");
-            if(mysqli_num_rows($evaluate) > 0) {
+              } else { 
+                $evaluate = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.evaluated_by=users.user_Id WHERE evaluation.evaluated_by='$id' AND evaluation_status=1 AND acad_Id IN (SELECT acad_Id FROM academic_year WHERE status=1) AND user_type='Faculty'");
           ?>
-            <a href="evaluate_history.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'evaluate_history.php') ? 'active' : ''; ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluation history</p></a>
-          <?php } else { ?>
-            <a data-toggle="modal" data-target="#evaluation" class="nav-link"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluation history</p></a>
-          <?php } ?>
-          </li>
 
+              
+              <?php if(mysqli_num_rows($evaluate) > 0) { ?>
+                <li class="nav-item">
+                  <a type="button" data-toggle="modal" data-target="#doneEvaluation" class="nav-link"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluate</p></a>
+                </li>
+                <li class="nav-item">
+                  <a href="evaluate_history.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'evaluate_history.php') ? 'active' : ''; ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluation history</p></a>
+                </li>
+              <?php } else { ?>
+                <li class="nav-item">
+                  <a href="process.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'process.php') ? 'active' : ''; ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluate</p></a>
+                </li>
+                <li class="nav-item">
+                  <a type="button" data-toggle="modal" data-target="#Evaluation" class="nav-link"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Evaluation history</p></a>
+                </li>
+              <?php } ?>
+
+
+
+          <?php } ?>
+
+
+
+
+
+          <?php if($row['user_type'] == 'Faculty'): ?>
           <li class="nav-item">
             <a href="evaluated_by.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'evaluated_by.php') ? 'active' : ''; ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp; Faculty Summary</p></a>
           </li>
-
-
-          <?php if($row['user_type'] != 'Student'): ?>
-         <!--  <li class="nav-item">
-            <a href="#" class="nav-link text-muted"><i class="fa-solid fa-file"></i><p>&nbsp;&nbsp;&nbsp; View report (On-going)</p></a>
-          </li> -->
           <?php endif; ?>
+
+
 
         </ul>
       </nav>

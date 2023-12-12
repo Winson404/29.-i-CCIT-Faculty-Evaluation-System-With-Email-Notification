@@ -3,9 +3,9 @@
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\Exception;
 
-	require '../vendor/PHPMailer/src/Exception.php';
-	require '../vendor/PHPMailer/src/PHPMailer.php';
-	require '../vendor/PHPMailer/src/SMTP.php';
+	require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/Exception.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/PHPMailer.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/SMTP.php';
 	date_default_timezone_set('Asia/Manila');
 
 
@@ -16,6 +16,14 @@
 
 		header("Location: evaluate.php?section_Id=".$section_Id."&&subject_Id=".$subject_Id."&&user_Id=".$user_Id." ");
 
+	}
+
+
+	if(isset($_POST['evaluation_faculty'])) {
+		$evaluated_by = mysqli_real_escape_string($conn, $_POST['evaluated_by']);
+		$user_Id      = mysqli_real_escape_string($conn, $_POST['user_Id']);
+
+		header("Location: evaluate_by_faculty.php?evaluated_by=".$evaluated_by."&&user_Id=".$user_Id." ");
 	}
 
 	// Retrieve the values sent via AJAX
@@ -98,34 +106,35 @@
 			    $mail = new PHPMailer(true);                            
 			    try {
 			        //Server settings
-			        $mail->isSMTP();                                     
-			        $mail->Host = 'smtp.gmail.com';                      
-			        $mail->SMTPAuth = true;                             
-			        $mail->Username = 'nhsmedellin@gmail.com';     
-	        		$mail->Password = 'fgzyhjjhjxdikkjp';                
-			        $mail->SMTPOptions = array(
-			            'ssl' => array(
-			            'verify_peer' => false,
-			            'verify_peer_name' => false,
-			            'allow_self_signed' => true
-			            )
-			        );                         
-			        $mail->SMTPSecure = 'ssl';                           
-			        $mail->Port = 465;                                   
-
-			        //Send Email
-			        $mail->setFrom('nhsmedellin@gmail.com');
-			        
-			        //Recipients
-			        $mail->addAddress('sonerwin12@gmail.com');              
-			        $mail->addReplyTo('sonesrwin12@gmail.com');
-			        
-			        //Content
-			        $mail->isHTML(true);                                  
-			        $mail->Subject = $subject;
-			        $mail->Body    = $message;
-
-			        $mail->send();
+        	        $mail->isSMTP();                                     
+        	        $mail->Host = 'smtp.gmail.com';                      
+        	        $mail->SMTPAuth = true;                             
+        	        $mail->Username = 'ccit@faculty-evaluation.site';     
+        	        $mail->Password = '@Saving09509972084';              
+        	        $mail->SMTPOptions = array(
+        	        'ssl' => array(
+        	        'verify_peer' => false,
+        	        'verify_peer_name' => false,
+        	        'allow_self_signed' => true
+        	        )
+        	        );                         
+        	        $mail->SMTPSecure = 'ssl';                           
+        	        $mail->Port = 465;                                   
+        
+        	        //Send Email
+        	        $mail->setFrom('ccit@faculty-evaluation.site', 'CCIT');
+    	            
+        
+        	        //Recipients
+        	        $mail->addAddress($email);              
+        	        $mail->addReplyTo('ccit@faculty-evaluation.site');
+        
+        	        //Content
+        	        $mail->isHTML(true);                                  
+        	        $mail->Subject = $subject;
+        	        $mail->Body    = $message;
+        
+        	        $mail->send();
 					$_SESSION['success'] = "Email sent successfully!";
 					header("Location: contact-us.php");
 

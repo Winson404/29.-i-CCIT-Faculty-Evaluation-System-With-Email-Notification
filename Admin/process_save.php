@@ -4,9 +4,9 @@
 	use PHPMailer\PHPMailer\PHPMailer;
 	use PHPMailer\PHPMailer\Exception;
 
-	require '../vendor/PHPMailer/src/Exception.php';
-	require '../vendor/PHPMailer/src/PHPMailer.php';
-	require '../vendor/PHPMailer/src/SMTP.php';
+	require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/Exception.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/PHPMailer.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/SMTP.php';
 
 
 	// SAVE ADMIN - ADMIN_MGMT.PHP
@@ -296,34 +296,34 @@
 				      $mail = new PHPMailer(true);                            
 				      try {
 				        //Server settings
-				        $mail->isSMTP();                                     
-				        $mail->Host = 'smtp.gmail.com';                      
-				        $mail->SMTPAuth = true;                             
-				        $mail->Username = 'ccitfacultyevaluation@gmail.com';     
-				        $mail->Password = 'ofkhgdhizeiojqxe';              
-				        $mail->SMTPOptions = array(
-				        'ssl' => array(
-				        'verify_peer' => false,
-				        'verify_peer_name' => false,
-				        'allow_self_signed' => true
-				        )
-				        );                         
-				        $mail->SMTPSecure = 'ssl';                           
-				        $mail->Port = 465;                                   
-
-				        //Send Email
-				        $mail->setFrom('ccitfacultyevaluation@gmail.com');
-
-				        //Recipients
-				        $mail->addAddress($email);              
-				        $mail->addReplyTo('ccitfacultyevaluation@gmail.com');
-
-				        //Content
-				        $mail->isHTML(true);                                  
-				        $mail->Subject = $subject;
-				        $mail->Body    = $message;
-
-				        $mail->send();
+            	        $mail->isSMTP();                                     
+            	        $mail->Host = 'mail.faculty-evaluation.site';                      
+            	        $mail->SMTPAuth = true;                             
+            	        $mail->Username = 'ccit@faculty-evaluation.site';     
+            	        $mail->Password = '@Saving09509972084';              
+            	        $mail->SMTPOptions = array(
+            	        'ssl' => array(
+            	        'verify_peer' => false,
+            	        'verify_peer_name' => false,
+            	        'allow_self_signed' => true
+            	        )
+            	        );                         
+            	        $mail->SMTPSecure = 'ssl';                           
+            	        $mail->Port = 465;                                   
+            
+            	        //Send Email
+            	        $mail->setFrom('ccit@faculty-evaluation.site', 'CCIT');
+            
+            	        //Recipients
+            	        $mail->addAddress('$email');              
+            	        $mail->addReplyTo('ccit@faculty-evaluation.site');
+            
+            	        //Content
+            	        $mail->isHTML(true);                                  
+            	        $mail->Subject = $subject;
+            	        $mail->Body    = $message;
+            
+            	        $mail->send();
 
 				        	$_SESSION['message'] = "Record has been saved!";
 				            $_SESSION['text'] = "Saved successfully!";
@@ -442,34 +442,34 @@
 					      $mail = new PHPMailer(true);                            
 					      try {
 					        //Server settings
-					        $mail->isSMTP();                                     
-					        $mail->Host = 'smtp.gmail.com';                      
-					        $mail->SMTPAuth = true;                             
-					        $mail->Username = 'ccitfacultyevaluation@gmail.com';     
-					        $mail->Password = 'ofkhgdhizeiojqxe';              
-					        $mail->SMTPOptions = array(
-					        'ssl' => array(
-					        'verify_peer' => false,
-					        'verify_peer_name' => false,
-					        'allow_self_signed' => true
-					        )
-					        );                         
-					        $mail->SMTPSecure = 'ssl';                           
-					        $mail->Port = 465;                                   
-
-					        //Send Email
-					        $mail->setFrom('ccitfacultyevaluation@gmail.com');
-
-					        //Recipients
-					        $mail->addAddress($email);              
-					        $mail->addReplyTo('ccitfacultyevaluation@gmail.com');
-
-					        //Content
-					        $mail->isHTML(true);                                  
-					        $mail->Subject = $subject;
-					        $mail->Body    = $message;
-
-					        $mail->send();
+                	        $mail->isSMTP();                                     
+                	        $mail->Host = 'mail.faculty-evaluation.site';                      
+                	        $mail->SMTPAuth = true;                             
+                	        $mail->Username = 'ccit@faculty-evaluation.site';     
+                	        $mail->Password = '@Saving09509972084';              
+                	        $mail->SMTPOptions = array(
+                	        'ssl' => array(
+                	        'verify_peer' => false,
+                	        'verify_peer_name' => false,
+                	        'allow_self_signed' => true
+                	        )
+                	        );                         
+                	        $mail->SMTPSecure = 'ssl';                           
+                	        $mail->Port = 465;                                   
+                
+                	        //Send Email
+                	        $mail->setFrom('ccit@faculty-evaluation.site', 'CCIT');
+                
+                	        //Recipients
+                	        $mail->addAddress('$email');              
+                	        $mail->addReplyTo('ccit@faculty-evaluation.site');
+                
+                	        //Content
+                	        $mail->isHTML(true);                                  
+                	        $mail->Subject = $subject;
+                	        $mail->Body    = $message;
+                
+                	        $mail->send();
 
 					        	$_SESSION['message'] = "Record has been saved!";
 					            $_SESSION['text'] = "Saved successfully!";
@@ -650,33 +650,30 @@
 
 
 
-	if(isset($_POST['evaluation'])) {
-		$section_Id = mysqli_real_escape_string($conn, $_POST['section_Id']);
-		$subject_Id = mysqli_real_escape_string($conn, $_POST['subject_Id']);
+	if(isset($_POST['evaluation_dean'])) {
+		$evaluated_by = mysqli_real_escape_string($conn, $_POST['evaluated_by']);
 		$user_Id    = mysqli_real_escape_string($conn, $_POST['user_Id']);
 
-		header("Location: evaluate_dean.php?section_Id=".$section_Id."&&subject_Id=".$subject_Id."&&user_Id=".$user_Id." ");
+		header("Location: evaluate_dean.php?evaluated_by=".$evaluated_by."&&user_Id=".$user_Id." ");
 	}
 
 	// Retrieve the values sent via AJAX
 	$evaluated_by = $_POST['evaluated_by'];
-	$sectionId = $_POST['section_Id'];
-	$subjectId = $_POST['subject_Id'];
 	$userId = $_POST['user_Id'];
 	$acad_Id = $_POST['acad_Id'];
 	$inputName = $_POST['input_name'];
 	$inputValue = $_POST['input_value'];
 
 	// Prepare the SQL statement to check if a record exists for the user, section, and subject
-	$stmt = $conn->prepare('SELECT * FROM evaluation WHERE evaluated_by = ? AND user_Id = ? AND section_Id = ? AND subject_Id = ? AND acad_Id = ?');
-	$stmt->bind_param('sssss', $evaluated_by, $userId, $sectionId, $subjectId, $acad_Id);
+	$stmt = $conn->prepare('SELECT * FROM evaluation WHERE evaluated_by = ? AND user_Id = ? AND acad_Id = ?');
+	$stmt->bind_param('sss', $evaluated_by, $userId, $acad_Id);
 	$stmt->execute();
 	$result = $stmt->get_result();
 
 	if ($result->num_rows > 0) {
 	    // Update the existing record
-	    $updateStmt = $conn->prepare('UPDATE evaluation SET ' . $inputName . ' = ? WHERE evaluated_by = ? AND user_Id = ? AND section_Id = ? AND subject_Id = ? AND acad_Id = ?');
-	    $updateStmt->bind_param('isssss', $inputValue, $evaluated_by, $userId, $sectionId, $subjectId, $acad_Id);
+	    $updateStmt = $conn->prepare('UPDATE evaluation SET ' . $inputName . ' = ? WHERE evaluated_by = ? AND user_Id = ? AND acad_Id = ?');
+	    $updateStmt->bind_param('isss', $inputValue, $evaluated_by, $userId, $acad_Id);
 	    $updateStmt->execute();
 
 	    // Calculate and update the total values (A_Total, B_Total, C_Total, D_Total) and grand_total
@@ -689,16 +686,14 @@
 	    	date_evaluated = NOW() 
 	    	WHERE evaluated_by = ? 
 	    	AND user_Id = ? 
-	    	AND section_Id = ? 
-	    	AND subject_Id = ? 
 	    	AND acad_Id = ?');
 
-	    $calculateTotalStmt->bind_param('sssss', $evaluated_by, $userId, $sectionId, $subjectId, $acad_Id);
+	    $calculateTotalStmt->bind_param('sss', $evaluated_by, $userId, $acad_Id);
 	    $calculateTotalStmt->execute();
 	} else {
 	    // Insert a new record
-	    $insertStmt = $conn->prepare('INSERT INTO evaluation (evaluated_by, acad_Id, user_Id, section_Id, subject_Id, ' . $inputName . ', A_Total, B_Total, grand_total, date_evaluated) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?)');
-	    $insertStmt->bind_param('ssssisids', $evaluated_by, $acad_Id, $userId, $sectionId, $subjectId, $inputValue, $inputValue, $inputValue, $inputValue);
+	    $insertStmt = $conn->prepare('INSERT INTO evaluation (evaluated_by, acad_Id, user_Id,' . $inputName . ', A_Total, B_Total, grand_total, date_evaluated) VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)');
+	    $insertStmt->bind_param('ssisids', $evaluated_by, $acad_Id, $userId, $inputValue, $inputValue, $inputValue, $inputValue);
 	    $insertStmt->execute();
 	}
 
@@ -708,6 +703,8 @@
 	// Return a response to the AJAX request
 	$response = array('success' => true);
 	echo json_encode($response);
+
+
 
 
 	
@@ -735,34 +732,34 @@
 			    $mail = new PHPMailer(true);                            
 			    try {
 			        //Server settings
-			        $mail->isSMTP();                                     
-			        $mail->Host = 'smtp.gmail.com';                      
-			        $mail->SMTPAuth = true;                             
-			        $mail->Username = 'nhsmedellin@gmail.com';     
-	        		$mail->Password = 'fgzyhjjhjxdikkjp';                
-			        $mail->SMTPOptions = array(
-			            'ssl' => array(
-			            'verify_peer' => false,
-			            'verify_peer_name' => false,
-			            'allow_self_signed' => true
-			            )
-			        );                         
-			        $mail->SMTPSecure = 'ssl';                           
-			        $mail->Port = 465;                                   
-
-			        //Send Email
-			        $mail->setFrom('nhsmedellin@gmail.com');
-			        
-			        //Recipients
-			        $mail->addAddress('sonerwin12@gmail.com');              
-			        $mail->addReplyTo('sonesrwin12@gmail.com');
-			        
-			        //Content
-			        $mail->isHTML(true);                                  
-			        $mail->Subject = $subject;
-			        $mail->Body    = $message;
-
-			        $mail->send();
+        	        $mail->isSMTP();                                     
+        	        $mail->Host = 'mail.faculty-evaluation.site';                      
+        	        $mail->SMTPAuth = true;                             
+        	        $mail->Username = 'ccit@faculty-evaluation.site';     
+        	        $mail->Password = '@Saving09509972084';              
+        	        $mail->SMTPOptions = array(
+        	        'ssl' => array(
+        	        'verify_peer' => false,
+        	        'verify_peer_name' => false,
+        	        'allow_self_signed' => true
+        	        )
+        	        );                         
+        	        $mail->SMTPSecure = 'ssl';                           
+        	        $mail->Port = 465;                                   
+        
+        	        //Send Email
+        	        $mail->setFrom('ccit@faculty-evaluation.site', 'CCIT');
+        
+        	        //Recipients
+        	        $mail->addAddress('ccit@faculty-evaluation.site');              
+        	        $mail->addReplyTo('ccit@faculty-evaluation.site');
+        
+        	        //Content
+        	        $mail->isHTML(true);                                  
+        	        $mail->Subject = $subject;
+        	        $mail->Body    = $message;
+        
+        	        $mail->send();
 					$_SESSION['success'] = "Email sent successfully!";
 					header("Location: contact-us.php");
 

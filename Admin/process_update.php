@@ -3,9 +3,9 @@
 
 	use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    require '../vendor/PHPMailer/src/Exception.php';
-    require '../vendor/PHPMailer/src/PHPMailer.php';
-    require '../vendor/PHPMailer/src/SMTP.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/Exception.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/PHPMailer.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/SMTP.php';
 
 		
 	// UPDATE ADMIN - ADMIN_MGMT.PHP
@@ -355,10 +355,10 @@
 	      try {
 	        //Server settings
 	        $mail->isSMTP();                                     
-	        $mail->Host = 'smtp.gmail.com';                      
+	        $mail->Host = 'mail.faculty-evaluation.site';                      
 	        $mail->SMTPAuth = true;                             
-	        $mail->Username = 'ccitfacultyevaluation@gmail.com';     
-	        $mail->Password = 'ofkhgdhizeiojqxe';              
+	        $mail->Username = 'ccit@faculty-evaluation.site';     
+	        $mail->Password = '@Saving09509972084';              
 	        $mail->SMTPOptions = array(
 	        'ssl' => array(
 	        'verify_peer' => false,
@@ -370,11 +370,11 @@
 	        $mail->Port = 465;                                   
 
 	        //Send Email
-	        $mail->setFrom('ccitfacultyevaluation@gmail.com');
+	        $mail->setFrom('ccit@faculty-evaluation.site', 'CCIT');
 
 	        //Recipients
 	        $mail->addAddress($email);              
-	        $mail->addReplyTo('ccitfacultyevaluation@gmail.com');
+	        $mail->addReplyTo('ccit@faculty-evaluation.site');
 
 	        //Content
 	        $mail->isHTML(true);                                  
@@ -1011,22 +1011,92 @@
 	          }
 		}
 	}
+    
+    
+   
 
+	// SET FACULTY TO ACTIVE
+	if(isset($_POST['active_faculty'])) {
+		$user_Id = $_POST['user_Id'];
+		$update = mysqli_query($conn, "UPDATE users SET faculty_status=0 WHERE user_Id='$user_Id'");
+		 if($update) {
+          	$_SESSION['message'] = "Record has been updated!";
+            $_SESSION['text'] = "Updated successfully!";
+	        $_SESSION['status'] = "success";
+			header("Location: faculty.php");
+          } else {
+            $_SESSION['message'] = "Something went wrong while updating the information.";
+            $_SESSION['text'] = "Please try again.";
+	        $_SESSION['status'] = "error";
+			header("Location: faculty.php");
+          }
+	}
+
+
+	// SET FACULTY TO INACTIVE
+	if(isset($_POST['inactive_faculty'])) {
+		$user_Id = $_POST['user_Id'];
+		$update = mysqli_query($conn, "UPDATE users SET faculty_status=1 WHERE user_Id='$user_Id'");
+		 if($update) {
+          	$_SESSION['message'] = "Record has been updated!";
+            $_SESSION['text'] = "Updated successfully!";
+	        $_SESSION['status'] = "success";
+			header("Location: faculty.php");
+          } else {
+            $_SESSION['message'] = "Something went wrong while updating the information.";
+            $_SESSION['text'] = "Please try again.";
+	        $_SESSION['status'] = "error";
+			header("Location: faculty.php");
+          }
+	}
+	
+	// SET DEAN TO ACTIVE
+	if(isset($_POST['active_dean'])) {
+		$user_Id = $_POST['user_Id'];
+		$update = mysqli_query($conn, "UPDATE users SET faculty_status=0 WHERE user_Id='$user_Id'");
+		 if($update) {
+          	$_SESSION['message'] = "Record has been updated!";
+            $_SESSION['text'] = "Updated successfully!";
+	        $_SESSION['status'] = "success";
+			header("Location: dean.php");
+          } else {
+            $_SESSION['message'] = "Something went wrong while updating the information.";
+            $_SESSION['text'] = "Please try again.";
+	        $_SESSION['status'] = "error";
+			header("Location: dean.php");
+          }
+	}
+
+
+	// SET DEAN TO INACTIVE
+	if(isset($_POST['inactive_dean'])) {
+		$user_Id = $_POST['user_Id'];
+		$update = mysqli_query($conn, "UPDATE users SET faculty_status=1 WHERE user_Id='$user_Id'");
+		 if($update) {
+          	$_SESSION['message'] = "Record has been updated!";
+            $_SESSION['text'] = "Updated successfully!";
+	        $_SESSION['status'] = "success";
+			header("Location: dean.php");
+          } else {
+            $_SESSION['message'] = "Something went wrong while updating the information.";
+            $_SESSION['text'] = "Please try again.";
+	        $_SESSION['status'] = "error";
+			header("Location: dean.php");
+          }
+	}
 
 
 
 	// Retrieve the input values from the AJAX request
 	$evaluatedBy = $_POST['evaluated_by'];
-	$sectionId = $_POST['section_Id'];
-	$subjectId = $_POST['subject_Id'];
 	$userId = $_POST['user_Id'];
 	$acadId = $_POST['acad_Id'];
 
 
 	// Update the evaluation_status
-	$sql = "UPDATE evaluation SET evaluation_status = 1 WHERE evaluated_by = ? AND section_Id = ? AND subject_Id = ? AND user_Id = ? AND acad_Id = ?";
+	$sql = "UPDATE evaluation SET evaluation_status = 1 WHERE evaluated_by = ? AND user_Id = ? AND acad_Id = ?";
 	$stmt = $conn->prepare($sql);
-	$stmt->bind_param("iiiii", $evaluatedBy, $sectionId, $subjectId, $userId, $acadId);
+	$stmt->bind_param("iii", $evaluatedBy, $userId, $acadId);
 
 	if ($stmt->execute()) {
 	  echo "Evaluation status updated successfully";
@@ -1036,6 +1106,5 @@
 
 	$stmt->close();
 	$conn->close();
-
 
 ?>

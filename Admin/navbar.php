@@ -11,6 +11,17 @@
 
       // RECORD TIME LOGGED IN TO BE USED IN AUTO LOGOUT - CODE CAN BE FOUND ON FOOTER.PHP
       $_SESSION['last_active'] = time();
+
+      // GET ACTIVE YEAR FOR EVALUATION
+      $active = mysqli_query($conn, "SELECT * FROM academic_year WHERE status = 1");
+      $activeId = mysqli_fetch_array($active);
+
+      $years = '';
+      if(mysqli_num_rows($active) > 0) {
+        // Split the academic year into two years
+        $years = explode('-', $activeId['year']);
+      }
+
 ?>
 
 <!DOCTYPE html>
@@ -75,9 +86,9 @@
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
+  <!-- <div class="preloader flex-column justify-content-center align-items-center">
     <img class="animation__shake" src="../images/CCITLogo.png" alt="BMSLogo" height="105" width="105">
-  </div> 
+  </div>  -->
 
   <!-- Navbar -->
   <!-- LIGHT MODE -->
@@ -159,6 +170,8 @@
       <span class="brand-text font-weight-light">i-CCIT Faculty</span>
       <br>
       <span class="text-sm ml-5 font-weight-light mt-2">&nbsp;&nbsp;Evaluation System</span>
+      <br>
+      <span class="badge badge-success text-xs ml-5 font-weight-light mt-2"><?php if(mysqli_num_rows($active) > 0) { echo $activeId['year'].': '.$activeId['semester']; } else { echo 'Evaluation: OFF'; } ?></span>
     </a>
 
 
@@ -167,7 +180,7 @@
     <div class="sidebar">
 
       <!-- Sidebar Menu -->
-      <nav class="mt-4">
+      <nav class="mt-5">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           
@@ -183,9 +196,12 @@
           <li class="nav-item">
            <a href="dean.php" class="nav-link <?= (in_array(basename($_SERVER['PHP_SELF']), ['dean.php', 'dean_mgmt.php', 'dean_view.php']) ? 'active' : '') ?>"><i class="fa-solid fa-chalkboard-user"></i><p>&nbsp; Dean</p></a>
           </li>
+          
+
           <li class="nav-item">
            <a href="faculty.php" class="nav-link <?= (in_array(basename($_SERVER['PHP_SELF']), ['faculty.php', 'faculty_mgmt.php', 'faculty_view.php']) ? 'active' : '') ?>"><i class="fa-solid fa-chalkboard-user"></i><p>&nbsp; Faculty</p></a>
           </li>
+
 
           <li class="nav-item">
             <a href="#" class="nav-link 
@@ -231,16 +247,47 @@
            <a href="evaluate_print.php" class="nav-link <?php echo (basename($_SERVER['PHP_SELF']) == 'evaluate_print.php') ? 'active' : ''; ?>"><i class="fa-solid fa-file"></i><p>&nbsp; Criteria</p></a>
           </li>
 
-          <?php if($row['user_type'] == 'Dean'): ?>
+          <?php 
+              if($row['user_type'] == 'Dean'){ 
+              $evaluate = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.evaluated_by=users.user_Id WHERE evaluation.evaluated_by='$id' AND evaluation_status=1 AND evaluation.acad_Id IN (SELECT acad_Id FROM academic_year WHERE status=1)");
+          ?>
           <li class="nav-item">
-            <a href="process.php" class="nav-link <?= (in_array(basename($_SERVER['PHP_SELF']), ['process.php', 'evaluate_dean.php']) ? 'active' : '') ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;Evaluate</p></a>
+            <?php if(mysqli_num_rows($evaluate) > 0) { ?>
+              <a data-toggle="modal" data-target="#doneEvaluation" class="nav-link"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;Evaluate</p></a>
+            <?php } else { ?>
+              <a href="process.php" class="nav-link <?= (in_array(basename($_SERVER['PHP_SELF']), ['process.php', 'evaluate_dean.php']) ? 'active' : '') ?>"><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;Evaluate</p></a>
+            <?php } ?>
+            
           </li>
-          <?php endif; ?>
+          <?php } ?>
+
+
 
           <li class="nav-item">
-            <a href="evaluate_history.php" class="nav-link <?= (in_array(basename($_SERVER['PHP_SELF']), ['evaluate_history.php', 'evaluate_view.php']) ? 'active' : '') ?>"><i class="fa-solid fa-check-to-slot"></i><p> Evaluation history</p></a>
+            <a href="evaluate_history.php" class="nav-link <?= (in_array(basename($_SERVER['PHP_SELF']), ['evaluate_history.php', 'evaluate_view.php', 'evaluate_history_print.php']) ? 'active' : '') ?>"><i class="fa-solid fa-check-to-slot"></i><p> Evaluation history</p></a>
           </li>
 
+
+          <li class="nav-header text-secondary" style="margin-bottom: -14px;">EVALUATORS</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link 
+              <?= (in_array(basename($_SERVER['PHP_SELF']), ['evaluator_dean.php', 'evaluator_faculty.php', 'evaluator_students.php']) ? 'active' : '') ?> "><i class="fa-solid fa-check-to-slot"></i><p>&nbsp;&nbsp;Evaluators<i class="right fas fa-angle-left"></i></p></a>
+            <ul class="nav nav-treeview"
+              <?= (in_array(basename($_SERVER['PHP_SELF']), ['evaluator_dean.php', 'evaluator_faculty.php', 'evaluator_students.php']) ? 'style="display: block;"' : '') ?>
+            >
+              <li class="nav-item">
+                <a href="evaluator_dean.php" class="nav-link <?= (in_array(basename($_SERVER['PHP_SELF']), ['evaluator_dean.php']) ? 'active' : '') ?>"><i class="fa-solid fa-check-to-slot"></i><p> Dean</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="evaluator_faculty.php" class="nav-link <?= (in_array(basename($_SERVER['PHP_SELF']), ['evaluator_faculty.php']) ? 'active' : '') ?>"><i class="fa-solid fa-check-to-slot"></i><p> Faculty</p></a>
+              </li>
+              <li class="nav-item">
+                <a href="evaluator_students.php" class="nav-link <?= (in_array(basename($_SERVER['PHP_SELF']), ['evaluator_students.php']) ? 'active' : '') ?>"><i class="fa-solid fa-check-to-slot"></i><p> Student</p></a>
+              </li>
+            </ul>
+          </li>
+
+          
           
 
           

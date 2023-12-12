@@ -37,6 +37,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header p-2 text-center">
+                <a href="evaluated_by_print.php" class="btn btn-success btn-sm float-sm-right mr-2"><i class="fa-solid fa-print"></i> Print</a>
                 <h5><b>People who evaluated you
                   <?php 
                     if (count($years) === 2) {
@@ -51,19 +52,21 @@
                 </h5>
               </div>
               <div class="card-body p-3">
-                 <table id="example111" class="table table-bordered table-hover text-sm">
+                 <table id="example11" class="table table-bordered table-hover text-sm">
                   <thead>
                   <tr> 
                     <th>EVALUATOR'S NAME</th>
                     <th>SUBJECT</th>
                     <th>TOTAL SCORE</th>
+                    <th>RATINGS</th>
                     <th>EVALUATION DATE</th>
                     <th>TOOLS</th>
                   </tr>
                   </thead>
                   <tbody id="users_data">
                       <?php 
-                        $sql = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.user_Id=users.user_Id JOIN subject ON evaluation.subject_Id=subject.sub_Id WHERE evaluation.user_Id='$id' ");
+                        $sql = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.user_Id=users.user_Id JOIN subject ON evaluation.subject_Id=subject.sub_Id WHERE evaluation.user_Id='$id' AND evaluation.acad_Id IN (SELECT acad_Id FROM academic_year WHERE status=1) ");
+                        if(mysqli_num_rows($sql) > 0) {
                         while ($row = mysqli_fetch_array($sql)) {
                           $evaluated_by = $row['evaluated_by'];
                           $sql2 = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$evaluated_by'");
@@ -84,11 +87,33 @@
                           <span class="badge bg-success pt-1"><?php echo $row['grand_total']; ?> / 100</span>
                         <?php endif; ?>
                         </td>
+                        <td>
+                          <?php
+                            $grand_total = $row['grand_total'];
+                            if ($grand_total >= 95 && $grand_total <= 100) {
+                                echo '<span class="badge bg-danger pt-1">Outstanding</span>';
+                            } elseif ($grand_total >= 90 && $grand_total < 95) {
+                                echo '<span class="badge bg-warning pt-1">Very Satisfactory</span>';
+                            } elseif ($grand_total >= 85 && $grand_total < 90) {
+                                echo '<span class="badge bg-info pt-1">Satisfactory</span>';
+                            } elseif ($grand_total >= 80 && $grand_total < 85) {
+                                echo '<span class="badge bg-success pt-1">Moderately Satisfactory</span>';
+                            } elseif ($grand_total >= 75 && $grand_total < 80) {
+                                echo '<span class="badge bg-primary pt-1">Fair</span>';
+                            } elseif ($grand_total < 75) {
+                                echo '<span class="badge bg-secondary pt-1">Poor</span>';
+                            }
+                            ?>
+                        </td>
                         <td class="text-primary"><?php echo date("F d, Y h:i A", strtotime($row['date_evaluated'])); ?></td>
                         <td>
                           <a class="btn btn-primary btn-xs" href="evaluated_by_view.php?Id=<?php echo $row['Id']; ?>"><i class="fa-solid fa-eye"></i> View </a>
                         </td> 
                     </tr>
+                    <?php } } else { ?>
+                      <tr>
+                        <td colspan="6" class="text-center">No record found</td>
+                      </tr>
                     <?php } ?>
                   </tbody>
                 </table>

@@ -58,7 +58,7 @@
                     <select name="instructor_Id" class="form-control" required>
                       <option value="" selected disabled>Select faculty name</option>
                       <?php 
-                        $fact = mysqli_query($conn, "SELECT * FROM users WHERE user_type='Faculty' ORDER BY lastname ");
+                        $fact = mysqli_query($conn, "SELECT * FROM users WHERE user_type='Faculty' AND is_deleted=0 GROUP BY user_Id ORDER BY lastname ");
                         if(mysqli_num_rows($fact) > 0) {
                           while ($f = mysqli_fetch_array($fact)) {
                             ?>
@@ -168,7 +168,7 @@
                         <option value="" selected disabled>Select faculty name</option>
                         <?php 
                           $instructor_Id = $row['instructor_Id'];
-                          $fact = mysqli_query($conn, "SELECT * FROM users WHERE user_type='Faculty' ORDER BY lastname ");
+                          $fact = mysqli_query($conn, "SELECT * FROM users WHERE user_type='Faculty' AND is_deleted=0 GROUP BY user_Id ORDER BY lastname");
                           if(mysqli_num_rows($fact) > 0) {
                             while ($f = mysqli_fetch_array($fact)) {
                               ?>

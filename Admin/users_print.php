@@ -34,7 +34,7 @@
             <div class="card-body">
               <div id="printElement">
                 <div class="row d-flex ">
-                    <img src="../images/CCIT.png" alt="" width="100">
+                    <img src="../images/CCITLogo.png" alt="" width="100">
                     <p class="ml-2 mt-3">College of Communication And Information Technology <br>Palanginan Iba Zambales <br> <span class="text-sm text-muted"><b>Printed by:</b> <?= $printed_by; ?> on <?= date('Y-m-d h:i A') ?></span></p>
                 </div>
                 <hr>
@@ -98,6 +98,12 @@
                     <?php } ?>
                   </tbody>
                 </table>
+                <div class="container mt-5 ">
+                  <hr>
+                  <div class="d-flex flex-column align-items-end">
+                    <p class="text-center ">__________________________________ <br><b>Signed and Approved by</b></p>
+                  </div>
+                </div>
               </div>
             </div>
           <div class="card-footer">

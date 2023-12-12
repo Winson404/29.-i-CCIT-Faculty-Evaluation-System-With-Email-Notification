@@ -14,8 +14,19 @@
             <div class="card card-outline card-primary">
               <div class="card-header text-center">
                 <a href="#" class="h1"><b>Student registration</b></a>
+                <br>
+               
               </div>
+
                 <div class="card-body">
+                    <div class="container text-justify">
+                      <div class="container mt-5">
+                        <h1 class="card-title">College Of Communication and Information Technology Data Privacy Act</h1>
+                        <p class="card-text">The College Of Communication and Information Technology Faculty Evaluation System prioritizes data privacy. It follows principles of lawfulness, fairness, and transparency in all data processing. Personal information is collected for specific purposes, minimizing unnecessary data.</p>
+                        <p class="card-text">For privacy inquiries, contact the Data Protection Officer at [contact email/phone number].</p>
+                      </div>
+
+                    </div>
                     <div class="row">
                         <div class="col-lg-12 mt-1 mb-2">
                           <a class="h5 text-primary"><b>Basic information</b></a>
@@ -111,7 +122,6 @@
                               <option selected disabled value="">Select sex</option>
                               <option value="Male">Male</option>
                               <option value="Female">Female</option>
-                              <option value="Non-Binary">Non-Binary</option>
                             </select>
                           </div>
                         </div>
@@ -131,16 +141,30 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
-                              <span class="text-dark"><b>Password</b></span>
-                              <input type="password" id="password" class="form-control" name="password" placeholder="Password" minlength="8">
-                              <span id="password-message" class="text-bold" style="font-style: italic;font-size: 12px;color: #e60000;"></span>
+                                <span class="text-dark"><b>Password</b></span>
+                                <div class="input-group">
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" minlength="8">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="eye-toggle-password" onclick="togglePasswordVisibility('password')">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span id="password-message" class="text-bold" style="font-style: italic; font-size: 12px; color: #e60000;"></span>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
-                              <span class="text-dark"><b>Confirm password</b></span>
-                              <input type="password" class="form-control" name="cpassword" placeholder="Retype password" id="cpassword" onkeyup="validate_password_confirm_password()" required minlength="8">
-                              <small id="wrong_pass_alert" class="text-bold" style="font-style: italic;font-size: 12px;"></small>
+                                <span class="text-dark"><b>Confirm password</b></span>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="cpassword" placeholder="Retype password" id="cpassword" onkeyup="validate_password_confirm_password()" required minlength="8">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="eye-toggle-cpassword" onclick="togglePasswordVisibility('cpassword')">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <small id="wrong_pass_alert" class="text-bold" style="font-style: italic; font-size: 12px;"></small>
                             </div>
                         </div>
 
@@ -163,7 +187,7 @@
                                 </div> -->
 
                               </div>
-                              <p class="help-block text-danger">Max. 500KB</p>
+                              <p class="help-block text-danger font-italic">Note: .png or .jpg files only up to 500KB max size</p>
                             </div>
                         </div>
                          <!-- LOAD IMAGE PREVIEW -->
@@ -271,4 +295,18 @@
       }
     });
   });
+
+    // SHOW/HIDE PASSWORD - REGISTRATION/SAVING/UPDATING RECORDS
+    function togglePasswordVisibility(inputId) {
+        var passwordInput = document.getElementById(inputId);
+        var eyeToggle = document.getElementById("eye-toggle-" + inputId);
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeToggle.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+        } else {
+            passwordInput.type = "password";
+            eyeToggle.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>';
+        }
+    }
 </script>

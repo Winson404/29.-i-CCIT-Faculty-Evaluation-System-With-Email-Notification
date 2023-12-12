@@ -86,7 +86,6 @@
                               <option selected disabled value="">Select sex</option>
                               <option value="Male">Male</option>
                               <option value="Female">Female</option>
-                              <option value="Non-Binary">Non-Binary</option>
                             </select>
                           </div>
                         </div>
@@ -106,16 +105,30 @@
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
-                              <span class="text-dark"><b>Password</b></span>
-                              <input type="password" id="password" class="form-control" name="password" placeholder="Password" minlength="8">
-                              <span id="password-message" class="text-bold" style="font-style: italic;font-size: 12px;color: #e60000;"></span>
+                                <span class="text-dark"><b>Password</b></span>
+                                <div class="input-group">
+                                    <input type="password" id="password" class="form-control" name="password" placeholder="Password" minlength="8">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="eye-toggle-password" onclick="togglePasswordVisibility('password')">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <span id="password-message" class="text-bold" style="font-style: italic; font-size: 12px; color: #e60000;"></span>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                             <div class="form-group">
-                              <span class="text-dark"><b>Confirm password</b></span>
-                              <input type="password" class="form-control" name="cpassword" placeholder="Retype password" id="cpassword" onkeyup="validate_password_confirm_password()" required minlength="8">
-                              <small id="wrong_pass_alert" class="text-bold" style="font-style: italic;font-size: 12px;"></small>
+                                <span class="text-dark"><b>Confirm password</b></span>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" name="cpassword" placeholder="Retype password" id="cpassword" onkeyup="validate_password_confirm_password()" required minlength="8">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="eye-toggle-cpassword" onclick="togglePasswordVisibility('cpassword')">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <small id="wrong_pass_alert" class="text-bold" style="font-style: italic; font-size: 12px;"></small>
                             </div>
                         </div>
 
@@ -134,7 +147,7 @@
                                   <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                 </div>
                               </div>
-                              <p class="help-block text-danger">Max. 500KB</p>
+                              <p class="help-block text-danger font-italic">Note: .png or .jpg files only up to 500KB max size</p>
                             </div>
                         </div>
                          <!-- LOAD IMAGE PREVIEW -->
@@ -249,7 +262,6 @@
                             <option selected disabled value="">Select sex</option>
                             <option value="Male"       <?php if($row['gender'] == 'Male') { echo 'selected'; } ?>>Male</option>
                             <option value="Female"     <?php if($row['gender'] == 'Female') { echo 'selected'; } ?>>Female</option>
-                            <option value="Non-Binary" <?php if($row['gender'] == 'Non-Binary') { echo 'selected'; } ?>>Non-Binary</option>
                           </select>
                         </div>
                       </div>
@@ -277,7 +289,7 @@
                                 <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                               </div>
                             </div>
-                            <p class="help-block text-danger">Max. 500KB</p>
+                            <p class="help-block text-danger font-italic">Note: .png or .jpg files only up to 500KB max size</p>
                           </div>
                       </div>
                        <!-- LOAD IMAGE PREVIEW -->

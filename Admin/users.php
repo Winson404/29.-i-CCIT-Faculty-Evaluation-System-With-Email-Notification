@@ -60,7 +60,7 @@
                       ?>
                     <tr>
                         <td><?php echo $row['department']; ?></td>
-                        <td><?php echo ' '.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'].' '; ?></td>
+                        <td><?php echo $row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix']; ?></td>
                         <td><?php echo $row['gender']; ?></td>
                         <!-- <td><?php //echo $row['email']; ?> <br> <span class="text-info"><?php //if($row['contact'] !== '') { echo '+63 '.$row['contact']; } ?></span></td> -->
                         <td>

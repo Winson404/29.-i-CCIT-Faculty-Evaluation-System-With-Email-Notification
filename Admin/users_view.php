@@ -44,7 +44,7 @@
                       <a class="h5 text-primary"><b>Basic information</b></a>
                       <div class="dropdown-divider"></div>
                     </div>
-                    <div class="col-lg-9 col-md-6 col-12">
+                    <div class="col-lg-12 col-md-6 col-12">
                       <div class="row">
                         <div class="col-12">
                           <div class="form-group">
@@ -101,6 +101,12 @@
                               </div>
                           </div>
                       </div>
+                      <hr>
+                    </div>
+
+                    <div class="col-lg-8 col-md-6 col-12 d-block m-auto">
+                      <h3 class="text-center">COR/ID</h3>
+                      <img src="../images-ID-verification/<?php echo $row['ID_verification']; ?>" alt="" class="d-block m-auto">
                     </div>
                      
                   </div>

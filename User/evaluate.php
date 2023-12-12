@@ -42,7 +42,10 @@
       <div class="container-fluid">
         <div class="card p-3">
           <div class="card-header text-center">
+            <?php if($row['user_type'] == 'Dean'): ?>
             <a href="evaluate_print.php?section_Id=<?= $section_Id; ?>&&subject_Id=<?= $subject_Id; ?>&&user_Id=<?= $user_Id; ?>" class="btn btn-dark btn-sm float-sm-right"><i class="fa-solid fa-print"></i> Print</a>
+            <?php endif; ?>
+
             <h5>Instrument for Instruction/Teaching Effectiveness</h5>
             <?php 
               if (count($years) === 2) {
@@ -558,13 +561,13 @@
           icon: "success",
           confirmButtonColor: '#3085d6',
           confirmButtonText: "Okay",
-          timer: 5000
+          timer: 2000
         });
 
         // Redirect to dashboard.php after 5 seconds
         setTimeout(function() {
           window.location.href = 'dashboard.php';
-        }, 5000);
+        }, 2000);
       },
       error: function(xhr, status, error) {
         console.error('An error occurred while updating evaluation status:', error);

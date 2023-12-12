@@ -7,6 +7,9 @@
     require 'vendor/PHPMailer/src/Exception.php';
     require 'vendor/PHPMailer/src/PHPMailer.php';
     require 'vendor/PHPMailer/src/SMTP.php';
+    // require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/Exception.php';
+    // require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/PHPMailer.php';
+    // require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/SMTP.php';
 
 
 	// USERS LOGIN - LOGIN.PHP
@@ -41,12 +44,38 @@
 			$row = mysqli_fetch_array($check);
 			$user_type = $row['user_type'];
 			$student_status = $row['student_status'];
-
+			$status = $row['faculty_status'];
+			
 			if($user_type == 'Admin' || $user_type == 'Dean') {
-				$_SESSION['login_attempts'] = 0;
-	    		$_SESSION['last_login_attempt'] = time();
-				$_SESSION['admin_Id'] = $row['user_Id'];
-				header("Location: Admin/dashboard.php");
+			    if($status == 0) {
+			        $_SESSION['login_attempts'] = 0;
+    	    		$_SESSION['last_login_attempt'] = time();
+    				$_SESSION['admin_Id'] = $row['user_Id'];
+    				header("Location: Admin/dashboard.php");
+	            } else {
+    			    $_SESSION['login_attempts']++;
+    			    $_SESSION['last_login_attempt'] = time();
+    				$_SESSION['message'] = "Only verified accounts can login.";
+    			    $_SESSION['text'] = "Please try again.";
+    			    $_SESSION['status'] = "error";
+    				header("Location: index.php");
+			    }
+				
+			} elseif($user_type == 'Faculty') {
+			    if($status == 0) {
+		        	$_SESSION['login_attempts'] = 0;
+		    		$_SESSION['last_login_attempt'] = time();
+					$_SESSION['user_Id'] = $row['user_Id'];
+					header("Location: User/dashboard.php");
+	            } else {
+    			    $_SESSION['login_attempts']++;
+    			    $_SESSION['last_login_attempt'] = time();
+    				$_SESSION['message'] = "Only verified accounts can login.";
+    			    $_SESSION['text'] = "Please try again.";
+    			    $_SESSION['status'] = "error";
+    				header("Location: index.php");
+			    }
+				
 			} else {
 				if($student_status == 1) {
 					$_SESSION['login_attempts'] = 0;
@@ -62,6 +91,7 @@
 					header("Location: index.php");
 				}
 			}
+		
 		} else {
 		    $_SESSION['login_attempts']++;
 		    $_SESSION['last_login_attempt'] = time();
@@ -221,10 +251,10 @@
 	      try {
 	        //Server settings
 	        $mail->isSMTP();                                     
-	        $mail->Host = 'smtp.gmail.com';                      
+	        $mail->Host = 'mail.faculty-evaluation.site';                      
 	        $mail->SMTPAuth = true;                             
-	        $mail->Username = 'ccitfacultyevaluation@gmail.com';     
-	        $mail->Password = 'ofkhgdhizeiojqxe';              
+	        $mail->Username = 'ccit@faculty-evaluation.site';     
+	        $mail->Password = '@Saving09509972084';              
 	        $mail->SMTPOptions = array(
 	        'ssl' => array(
 	        'verify_peer' => false,
@@ -236,11 +266,11 @@
 	        $mail->Port = 465;                                   
 
 	        //Send Email
-	        $mail->setFrom('ccitfacultyevaluation@gmail.com');
+	        $mail->setFrom('ccit@faculty-evaluation.site', 'CCIT');
 
 	        //Recipients
 	        $mail->addAddress($email);              
-	        $mail->addReplyTo('ccitfacultyevaluation@gmail.com');
+	        $mail->addReplyTo('ccit@faculty-evaluation.site');
 
 	        //Content
 	        $mail->isHTML(true);                                  

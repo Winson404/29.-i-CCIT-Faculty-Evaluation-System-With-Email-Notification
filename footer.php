@@ -104,7 +104,7 @@
     } 
     else {
         document.getElementById('text').style.color = 'red';
-        document.getElementById('text').innerHTML = 'Domain must be @gmail.com';
+        document.getElementById('text').innerHTML = 'Must be Gmail.com';
         document.getElementById('create_admin').disabled = true;
         document.getElementById('create_admin').style.opacity = (0.4);
         

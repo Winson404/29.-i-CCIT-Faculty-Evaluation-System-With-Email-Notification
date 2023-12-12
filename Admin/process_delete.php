@@ -1,5 +1,10 @@
 <?php 
 	include '../config.php';
+	use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/Exception.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/PHPMailer.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/SMTP.php';
 
 	function msg_success($page) {
 		$_SESSION['message'] = "Record has been deleted!";
@@ -35,10 +40,63 @@
 	// DELETE USER - USERS_DELETE.PHP
 	if(isset($_POST['delete_user'])) {
 		$user_Id = $_POST['user_Id'];
+		$sql = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$user_Id' ");
+		$row = mysqli_fetch_array($sql);
+		$email = $row['email'];
+		$name = $row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'];
+
 
 		$delete = mysqli_query($conn, "UPDATE users SET student_status=2 WHERE user_Id='$user_Id'");
 		if($delete) {
-			msg_success("users.php");
+
+		  $subject = 'Account denied';
+	      $message = '<p>Good day sir/maam '.$name.', this is to inform you that your account has been denied. Thank you!</p>
+	      <p><b>NOTE:</b> This is a system generated email. Please do not reply.</p> ';
+
+          $mail = new PHPMailer(true);                            
+	      try {
+	        //Server settings
+	        $mail->isSMTP();                                     
+	        $mail->Host = 'mail.faculty-evaluation.site';                      
+	        $mail->SMTPAuth = true;                             
+	        $mail->Username = 'ccit@faculty-evaluation.site';     
+	        $mail->Password = '@Saving09509972084';              
+	        $mail->SMTPOptions = array(
+	        'ssl' => array(
+	        'verify_peer' => false,
+	        'verify_peer_name' => false,
+	        'allow_self_signed' => true
+	        )
+	        );                         
+	        $mail->SMTPSecure = 'ssl';                           
+	        $mail->Port = 465;                                   
+
+	        //Send Email
+	        $mail->setFrom('ccit@faculty-evaluation.site', 'CCIT');
+
+	        //Recipients
+	        $mail->addAddress($email);              
+	        $mail->addReplyTo('ccit@faculty-evaluation.site');
+
+	        //Content
+	        $mail->isHTML(true);                                  
+	        $mail->Subject = $subject;
+	        $mail->Body    = $message;
+
+	        $mail->send();
+
+	        $_SESSION['message'] = "Student account has been denied";
+	       	    $_SESSION['text'] = "Verified successfully!";
+		        $_SESSION['status'] = "success";
+				header("Location: users.php");
+
+		  } catch (Exception $e) { 
+		  	$_SESSION['message'] = "Email not sent.";
+		    $_SESSION['text'] = "Please try again.";
+		    $_SESSION['status'] = "error";
+			header("Location: users.php");
+		  }
+			
 		} else {
 			msg_failed("users.php");
         }
@@ -120,14 +178,12 @@
 
 	// Retrieve the values sent via AJAX
 	$evaluatedBy = $_POST['evaluated_by'];
-	$sectionId = $_POST['section_Id'];
-	$subjectId = $_POST['subject_Id'];
 	$userId = $_POST['user_Id'];
 	$acadId = $_POST['acad_Id'];
 
 	// Prepare the SQL statement to delete the record
-	$stmt = $conn->prepare('DELETE FROM evaluation WHERE evaluated_by = ? AND section_Id = ? AND subject_Id = ? AND user_Id = ? AND acad_Id = ?');
-	$stmt->bind_param('sssss', $evaluatedBy, $sectionId, $subjectId, $userId, $acadId);
+	$stmt = $conn->prepare('DELETE FROM evaluation WHERE evaluated_by = ? AND user_Id = ? AND acad_Id = ?');
+	$stmt->bind_param('sss', $evaluatedBy, $userId, $acadId);
 	$stmt->execute();
 
 	// Close the database connection

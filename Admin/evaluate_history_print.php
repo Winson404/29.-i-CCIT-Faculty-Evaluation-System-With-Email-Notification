@@ -34,61 +34,72 @@
             <div class="card-body">
               <div id="printElement">
                 <div class="row d-flex ">
-                    <img src="../images/CCIT.png" alt="" width="100">
+                    <img src="../images/CCITLogo.png" alt="" width="100">
                     <p class="ml-2 mt-3">College of Communication And Information Technology <br>Palanginan Iba Zambales <br> <span class="text-sm text-muted"><b>Printed by:</b> <?= $printed_by; ?> on <?= date('Y-m-d h:i A') ?></span></p>
                 </div>
                 <hr>
                 <p class="text-center"><b>EVALUATION HISTORY RECORDS</b></p>
-                <table id="example11" class="table table-bordered table-hover text-sm">
+                <table id="" class="table table-bordered table-hover table-sm text-sm">
                   <thead>
-                  <tr>
-                    <th>#</th>  
-                    <th>INSTRUCTOR'S NAME</th>
-                    <th>SECTION</th>
-                    <th>SUBJECT</th>
+                  <tr> 
+                    <th>EVALUATOR'S NAME</th>
+                    <th>EVALUATEES</th>
                     <th>TOTAL SCORE</th>
                     <th>RATINGS</th>
                     <th>EVALUATION DATE</th>
                   </tr>
                   </thead>
                   <tbody id="users_data">
-                      <?php
-                        $i = 1;  
-                        $sql = mysqli_query($conn, "SELECT *, subject.name, section.section, section.yr_level, AVG(evaluation.grand_total) AS avg_grand_total
-                        FROM evaluation
-                        JOIN users ON evaluation.user_Id = users.user_Id
-                        JOIN subject ON evaluation.subject_Id = subject.sub_Id
-                        JOIN section ON evaluation.section_Id = section.section_Id
-                        WHERE evaluation.evaluation_status = 1
-                        GROUP BY evaluation.user_Id, evaluation.subject_Id ");
+                      <?php 
+                        // $sql = mysqli_query($conn, "SELECT * FROM evaluation JOIN users ON evaluation.user_Id=users.user_Id JOIN subject ON evaluation.subject_Id=subject.sub_Id WHERE evaluation.evaluated_by='$id' AND evaluation.acad_Id IN (SELECT acad_Id FROM academic_year WHERE status=1) ");
+                        $sql = mysqli_query($conn, "
+                            SELECT *, evaluation.user_Id AS eval_user_Id 
+                            FROM evaluation 
+                            LEFT JOIN users ON evaluation.evaluated_by = users.user_Id 
+                            LEFT JOIN subject ON evaluation.subject_Id = subject.sub_Id 
+                            LEFT JOIN academic_year ON evaluation.acad_Id = academic_year.acad_Id
+                            WHERE evaluation.grand_total<=100 AND evaluation.evaluation_status=1 AND evaluation.acad_Id IN (SELECT acad_Id FROM academic_year WHERE status=1)  ORDER BY evaluation.grand_total DESC");
+
                         while ($row = mysqli_fetch_array($sql)) {
+                            $a_total = $row['A_Total'];
+                            $b_total = $row['B_Total'];
+                            $c_total = $row['C_Total'];
+                            $d_total = $row['D_Total'];
+                            $avg_grand_total = $a_total + $b_total + $c_total + $d_total;
+                            
+                            // EVALUATOR TYPE
+                            $type = $row['user_type'];
                       ?>
                     <tr>
-                        <td><?php echo $i++; ?></td>
+                       
+                        <td><?php echo ' '.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'].' '; ?></td>
                         <td>
-                          <?php
-                            $evaluatedInstructorUserId = $row['user_Id'];
-                            $evaluatedInstructorQuery = mysqli_query($conn, "SELECT CONCAT(firstname, ' ', middlename, ' ', lastname, ' ', suffix) AS evaluatedInstructor FROM users WHERE user_Id = '$evaluatedInstructorUserId'");
-                            $evaluatedInstructorRow = mysqli_fetch_array($evaluatedInstructorQuery);
-                            echo $evaluatedInstructorRow['evaluatedInstructor'];
-                          ?>
+                          <?php 
+                            // if($row['subject_Id'] == 0 AND $row['section_Id'] == 0) {
+                            //   echo 'Evalutuated by: <span class="badge bg-primary pt-1">'.$type.'</span>';
+                            // } else {
+                            //   echo $row['name'];
+                            // }
+                            $evaluation_user_Id = $row['eval_user_Id'];
+                            $sql2 = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$evaluation_user_Id'");
+                            $row2 = mysqli_fetch_array($sql2);
+                            echo $row2['firstname'].' '.$row2['middlename'].' '.$row2['lastname'].' '.$row2['suffix'];
+                          ?>                          
                         </td>
-                        <td><?php echo $row['yr_level'].' - '.$row['section']; ?></td>
-                        <td><?php echo $row['name']; ?></td>
                         <td>
-                          <?php if($row['avg_grand_total'] <= 60): ?>
-                          <span class="badge bg-danger pt-1"><?php echo number_format($row['avg_grand_total'], 2, '.', ','); ?> / 100</span>
-                          <?php elseif($row['avg_grand_total'] <= 75): ?>
-                          <span class="badge bg-warning pt-1"><?php echo number_format($row['avg_grand_total'], 2, '.', ','); ?> / 100</span>
-                          <?php elseif($row['avg_grand_total'] <= 95): ?>
-                          <span class="badge bg-primary pt-1"><?php echo number_format($row['avg_grand_total'], 2, '.', ','); ?> / 100</span>
+                          <?php if($row['grand_total'] <= 60): ?>
+                          <span class="badge bg-danger pt-1"><?php echo $row['grand_total']; ?> / 100</span>
+                          <?php elseif($row['grand_total'] <= 75): ?>
+                          <span class="badge bg-warning pt-1"><?php echo $row['grand_total']; ?> / 100</span>
+                          <?php elseif($row['grand_total'] <= 95): ?>
+                          <span class="badge bg-primary pt-1"><?php echo $row['grand_total']; ?> / 100</span>
                           <?php else: ?>
-                          <span class="badge bg-success pt-1"><?php echo number_format($row['avg_grand_total'], 2, '.', ','); ?> / 100</span>
+                          <span class="badge bg-success pt-1"><?php echo $row['grand_total']; ?> / 100</span>
                         <?php endif; ?>
                         </td>
                         <td>
                           <?php
-                            $avg_grand_total = $row['avg_grand_total'];
+                            
                             if ($avg_grand_total >= 95 && $avg_grand_total <= 100) {
                                 echo '<span class="badge bg-danger pt-1">Outstanding</span>';
                             } elseif ($avg_grand_total >= 90 && $avg_grand_total < 95) {
@@ -111,6 +122,12 @@
 
                   </tbody>
                 </table>
+                <div class="container mt-5 ">
+                  <hr>
+                  <div class="d-flex flex-column align-items-end">
+                    <p class="text-center ">__________________________________ <br><b>Signed and Approved by</b></p>
+                  </div>
+                </div>
               </div>
             </div>
           <div class="card-footer">

@@ -149,7 +149,6 @@
                               <option selected disabled value="">Select sex</option>
                               <option value="Male"       <?php if($row['gender'] == 'Male') { echo 'selected'; } ?>>Male</option>
                               <option value="Female"     <?php if($row['gender'] == 'Female') { echo 'selected'; } ?>>Female</option>
-                              <option value="Non-Binary" <?php if($row['gender'] == 'Non-Binary') { echo 'selected'; } ?>>Non-Binary</option>
                             </select>
                           </div>
                         </div>
@@ -164,6 +163,7 @@
                               <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                             </div>
                           </div>
+                          <p class="help-block text-danger font-italic">Note: .png or .jpg files only up to 500KB max size</p>
                         </div>
                         <div class="col-sm-5"><div class="form-group" id="user_preview"></div></div>
                       </div>

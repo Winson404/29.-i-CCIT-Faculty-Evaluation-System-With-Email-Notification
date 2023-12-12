@@ -31,7 +31,7 @@
             <div class="small-box bg-info">
               <div class="inner">
                 <?php
-                  $users = mysqli_query($conn, "SELECT Id FROM evaluation WHERE evaluated_by ='$id' AND evaluation_status=1");
+                  $users = mysqli_query($conn, "SELECT * FROM evaluation WHERE evaluated_by='$id' AND evaluation_status=1 AND acad_Id IN (SELECT acad_Id FROM academic_year WHERE status=1)");
                   $row_users = mysqli_num_rows($users);
                 ?>
                 <h3><?php echo $row_users; ?></h3>

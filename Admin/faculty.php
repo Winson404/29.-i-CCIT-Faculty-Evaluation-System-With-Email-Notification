@@ -46,13 +46,14 @@
                     <th>NAME</th>
                     <th>GENDER</th>
                     <th>EMAIL</th>
+                    <th>STATUS</th>
                     <th>DATE ADDED</th>
                     <th>TOOLS</th>
                   </tr>
                   </thead>
                   <tbody id="users_data">
                       <?php 
-                        $sql = mysqli_query($conn, "SELECT * FROM users WHERE is_deleted=0 AND user_type = 'Faculty' ");
+                        $sql = mysqli_query($conn, "SELECT * FROM users WHERE is_deleted=0 AND user_type = 'Faculty'");
                         while ($row = mysqli_fetch_array($sql)) {
                       ?>
                     <tr>
@@ -64,13 +65,22 @@
                         <td><?php echo ' '.$row['firstname'].' '.$row['middlename'].' '.$row['lastname'].' '.$row['suffix'].' '; ?></td>
                         <td><?php echo $row['gender']; ?></td>
                         <td><?php echo $row['email']; ?></td>
+                        <td>
+                          <?php if($row['faculty_status'] == 0): ?>
+                            <span class="badge badge-success pt-1">Active</span>
+                          <?php else: ?>
+                            <span class="badge badge-dark pt-1">Inactive</span>
+                          <?php endif; ?>
+                        </td> 
                         <td class="text-primary"><?php echo $row['date_registered']; ?></td>
                         <td>
                           <a class="btn btn-primary btn-sm" href="faculty_view.php?user_Id=<?php echo $row['user_Id']; ?>"><i class="fas fa-folder"></i> View</a>
 
                           <?php if($u_type == 'Admin'): ?>
                           <a class="btn btn-info btn-sm" href="faculty_mgmt.php?page=<?php echo $row['user_Id']; ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
-                          <button type="button" class="btn bg-danger btn-sm" data-toggle="modal" data-target="#delete<?php echo $row['user_Id']; ?>"><i class="fas fa-trash"></i> Delete</button>
+                          <!-- <button type="button" class="btn bg-danger btn-sm" data-toggle="modal" data-target="#delete<?php //echo $row['user_Id']; ?>"><i class="fas fa-trash"></i> Delete</button> -->
+                          <button type="button" class="btn bg-success btn-sm" data-toggle="modal" data-target="#active<?php echo $row['user_Id']; ?>" <?php if($row['faculty_status'] == 0) { echo 'disabled'; } ?>><i class="fas fa-pencil-alt"></i> Set Active</button>
+                          <button type="button" class="btn bg-dark btn-sm" data-toggle="modal" data-target="#inactive<?php echo $row['user_Id']; ?>" <?php if($row['faculty_status'] == 1) { echo 'disabled'; } ?>><i class="fas fa-pencil-alt"></i> Set Inactive</button>
                           <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#password<?php echo $row['user_Id']; ?>"><i class="fa-solid fa-lock"></i> Security</button>
                           <?php endif; ?>
                         </td> 

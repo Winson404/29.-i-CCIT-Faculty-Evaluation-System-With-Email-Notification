@@ -1,9 +1,8 @@
 <title>i-CCIT Faculty Evaluation System | Evaluation</title>
 <?php 
     include 'navbar.php'; 
-    if(isset($_GET['section_Id']) && isset($_GET['subject_Id']) && isset($_GET['user_Id'])) {
-      $section_Id = mysqli_real_escape_string($conn, $_GET['section_Id']);
-      $subject_Id = mysqli_real_escape_string($conn, $_GET['subject_Id']);
+    if(isset($_GET['evaluated_by']) && isset($_GET['user_Id'])) {
+      $evaluated_by = mysqli_real_escape_string($conn, $_GET['evaluated_by']);
       $user_Id    = mysqli_real_escape_string($conn, $_GET['user_Id']);
 
       $faculty = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$user_Id'");
@@ -396,8 +395,6 @@
 
     $('input[type="radio"]').on('click', function() {
       var evaluated_by = $('#evaluated_by').val();
-      var sectionId = $('#section_Id').val();
-      var subjectId = $('#subject_Id').val();
       var userId = $('#user_Id').val();
       var acad_Id = $('#acad_Id').val();
       var inputName = $(this).attr('name');
@@ -409,8 +406,6 @@
         method: 'POST',
         data: {
           evaluated_by: evaluated_by,
-          section_Id: sectionId,
-          subject_Id: subjectId,
           user_Id: userId,
           acad_Id: acad_Id,
           input_name: inputName,
@@ -487,8 +482,6 @@
 
         // Delete record from the evaluation table
         var evaluated_by = $('#evaluated_by').val();
-        var sectionId = $('#section_Id').val();
-        var subjectId = $('#subject_Id').val();
         var userId = $('#user_Id').val();
         var acad_Id = $('#acad_Id').val();
 
@@ -497,8 +490,6 @@
           method: 'POST',
           data: {
             evaluated_by: evaluated_by,
-            section_Id: sectionId,
-            subject_Id: subjectId,
             user_Id: userId,
             acad_Id: acad_Id
           },
@@ -534,8 +525,6 @@
   } else {
     // Make an AJAX request to update evaluation_status
     var evaluatedBy = $('#evaluated_by').val();
-    var sectionId = $('#section_Id').val();
-    var subjectId = $('#subject_Id').val();
     var userId = $('#user_Id').val();
     var acadId = $('#acad_Id').val();
 
@@ -544,8 +533,6 @@
       method: 'POST',
       data: {
         evaluated_by: evaluatedBy,
-        section_Id: sectionId,
-        subject_Id: subjectId,
         user_Id: userId,
         acad_Id: acadId
       },
@@ -558,13 +545,13 @@
           icon: "success",
           confirmButtonColor: '#3085d6',
           confirmButtonText: "Okay",
-          timer: 5000
+          timer: 2000
         });
 
         // Redirect to dashboard.php after 5 seconds
         setTimeout(function() {
           window.location.href = 'dashboard.php';
-        }, 5000);
+        }, 2000);
       },
       error: function(xhr, status, error) {
         console.error('An error occurred while updating evaluation status:', error);
