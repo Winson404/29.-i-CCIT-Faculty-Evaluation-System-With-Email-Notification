@@ -103,7 +103,42 @@
                     </tr>
                   </tbody>
                 </table>
-         
+                <br />
+                <table class="table table-bordered table-hover text-sm table-sm">
+                  <thead>
+                    <tr class="text-center">
+                      <th>RATING RANGE</th>
+                      <th>REMARKS</th>
+                    </tr>
+                  </thead>
+                  <tbody id="users_data">
+                    <tr>
+                      <td class="text-center">95-100</td>
+                      <td class="text-center">Outstanding</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">90-94</td>
+                      <td class="text-center">Very Satisfactory</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">85-89</td>
+                      <td class="text-center">Satisfactory</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">80-84</td>
+                      <td class="text-center">Moderately Satisfactory</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">75-79</td>
+                      <td class="text-center">Fair</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">74 Below</td>
+                      <td class="text-center">Poor</td>
+                    </tr>
+                  </tbody>
+                </table>
+                
                 <br><br>
 
                 <table id="example111" class="table table-bordered table-hover text-sm table-sm">
@@ -433,6 +468,41 @@
                   </tbody>
                 </table>
          
+                <br />
+                <table class="table table-bordered table-hover text-sm table-sm">
+                  <thead>
+                    <tr class="text-center">
+                      <th>RATING RANGE</th>
+                      <th>REMARKS</th>
+                    </tr>
+                  </thead>
+                  <tbody id="users_data">
+                    <tr>
+                      <td class="text-center">95-100</td>
+                      <td class="text-center">Outstanding</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">90-94</td>
+                      <td class="text-center">Very Satisfactory</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">85-89</td>
+                      <td class="text-center">Satisfactory</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">80-84</td>
+                      <td class="text-center">Moderately Satisfactory</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">75-79</td>
+                      <td class="text-center">Fair</td>
+                    </tr>
+                    <tr>
+                      <td class="text-center">74 Below</td>
+                      <td class="text-center">Poor</td>
+                    </tr>
+                  </tbody>
+                </table>
                 <br><br>
 
                 <table id="example111" class="table table-bordered table-hover text-sm table-sm">

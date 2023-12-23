@@ -650,12 +650,19 @@
 
 
 
-	if(isset($_POST['evaluation_dean'])) {
-		$evaluated_by = mysqli_real_escape_string($conn, $_POST['evaluated_by']);
-		$user_Id    = mysqli_real_escape_string($conn, $_POST['user_Id']);
+// 	if(isset($_POST['evaluation_dean'])) {
+// 		$evaluated_by = mysqli_real_escape_string($conn, $_POST['evaluated_by']);
+// 		$user_Id    = mysqli_real_escape_string($conn, $_POST['user_Id']);
 
-		header("Location: evaluate_dean.php?evaluated_by=".$evaluated_by."&&user_Id=".$user_Id." ");
-	}
+// 		header("Location: evaluate_dean.php?evaluated_by=".$evaluated_by."&&user_Id=".$user_Id." ");
+// 	}
+	
+	if (isset($_POST['evaluation_dean'])) {
+    	$evaluated_by = mysqli_real_escape_string($conn, $_POST['evaluated_by']);
+    	$user_Id    = mysqli_real_escape_string($conn, $_POST['user_Id']);
+    
+    	header("Location: evaluate_dean.php?evaluated_by=" . $evaluated_by . "&&user_Id=" . $user_Id . " ");
+    }
 
 	// Retrieve the values sent via AJAX
 	$evaluated_by = $_POST['evaluated_by'];

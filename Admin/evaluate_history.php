@@ -113,7 +113,7 @@
                             $sql2 = mysqli_query($conn, "SELECT * FROM users WHERE user_Id='$evaluation_user_Id'");
                             $row2 = mysqli_fetch_array($sql2);
                             echo $row2['firstname'].' '.$row2['middlename'].' '.$row2['lastname'].' '.$row2['suffix'];
-                            echo $row['eval_user_Id'];;
+                      
                           ?>                          
                         </td>
                         <td>
@@ -147,10 +147,11 @@
                         </td>
                         <td class="text-primary"><?php echo date("F d, Y h:i A", strtotime($row['date_evaluated'])); ?></td>
                         <td>
-
-
-                          <a class="btn btn-primary btn-xs" href="evaluate_view.php?Id=<?php echo $row['Id']; ?>"><i class="fa-solid fa-eye"></i> View</a>
-                        </td> 
+                        <a class="btn btn-info btn-xs <?php if ($u_type == 'Dean') {
+                                                        echo 'd-none';
+                                                      } ?>" href="evaluate_history_edit.php?Id=<?php echo $row['Id']; ?>"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <a class="btn btn-primary btn-xs" href="evaluate_view.php?Id=<?php echo $row['Id']; ?>"><i class="fa-solid fa-eye"></i> View</a>
+                      </td>
                     </tr>
 
                     <?php } ?>

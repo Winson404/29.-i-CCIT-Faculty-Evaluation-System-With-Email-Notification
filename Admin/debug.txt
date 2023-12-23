@@ -1,0 +1,124 @@
+Array
+(
+    [0] => Array
+        (
+            [input_name] => A1
+            [input_value] => 4
+        )
+
+    [1] => Array
+        (
+            [input_name] => A2
+            [input_value] => 4
+        )
+
+    [2] => Array
+        (
+            [input_name] => A3
+            [input_value] => 4
+        )
+
+    [3] => Array
+        (
+            [input_name] => A4
+            [input_value] => 4
+        )
+
+    [4] => Array
+        (
+            [input_name] => A5
+            [input_value] => 4
+        )
+
+    [5] => Array
+        (
+            [input_name] => B1
+            [input_value] => 4
+        )
+
+    [6] => Array
+        (
+            [input_name] => B2
+            [input_value] => 4
+        )
+
+    [7] => Array
+        (
+            [input_name] => B3
+            [input_value] => 4
+        )
+
+    [8] => Array
+        (
+            [input_name] => B4
+            [input_value] => 4
+        )
+
+    [9] => Array
+        (
+            [input_name] => B5
+            [input_value] => 4
+        )
+
+    [10] => Array
+        (
+            [input_name] => C1
+            [input_value] => 5
+        )
+
+    [11] => Array
+        (
+            [input_name] => C2
+            [input_value] => 5
+        )
+
+    [12] => Array
+        (
+            [input_name] => C3
+            [input_value] => 5
+        )
+
+    [13] => Array
+        (
+            [input_name] => C4
+            [input_value] => 5
+        )
+
+    [14] => Array
+        (
+            [input_name] => C5
+            [input_value] => 5
+        )
+
+    [15] => Array
+        (
+            [input_name] => D1
+            [input_value] => 5
+        )
+
+    [16] => Array
+        (
+            [input_name] => D2
+            [input_value] => 5
+        )
+
+    [17] => Array
+        (
+            [input_name] => D3
+            [input_value] => 5
+        )
+
+    [18] => Array
+        (
+            [input_name] => D4
+            [input_value] => 5
+        )
+
+    [19] => Array
+        (
+            [input_name] => D5
+            [input_value] => 4
+        )
+
+)
+Script executed successfully

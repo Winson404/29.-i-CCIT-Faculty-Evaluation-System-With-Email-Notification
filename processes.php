@@ -4,12 +4,12 @@
 
 	use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    require 'vendor/PHPMailer/src/Exception.php';
-    require 'vendor/PHPMailer/src/PHPMailer.php';
-    require 'vendor/PHPMailer/src/SMTP.php';
-    // require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/Exception.php';
-    // require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/PHPMailer.php';
-    // require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/SMTP.php';
+    // require 'vendor/PHPMailer/src/Exception.php';
+    // require 'vendor/PHPMailer/src/PHPMailer.php';
+    // require 'vendor/PHPMailer/src/SMTP.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/Exception.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/PHPMailer.php';
+    require $_SERVER['DOCUMENT_ROOT'] . '/vendor/phpmailer/src/SMTP.php';
 
 
 	// USERS LOGIN - LOGIN.PHP
